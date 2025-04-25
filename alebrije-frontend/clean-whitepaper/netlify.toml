@@ -1,0 +1,19 @@
+[build]
+  publish = "/"
+
+[site]
+  name = "xolo-whitepaper"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[headers]
+  for = "/whitepaper.pdf"
+    [headers.values]
+    Content-Type = "application/pdf"
+    Content-Disposition = "inline"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Pragma = "no-cache"
+    Expires = "0" 

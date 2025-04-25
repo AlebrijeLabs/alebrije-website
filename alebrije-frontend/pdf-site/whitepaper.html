@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALEBRIJE Whitepaper - Official Documentation</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    :root {
+      --primary-color: #4CAF50;
+      --secondary-color: #45a049;
+      --text-color: #333;
+      --bg-color: #fff;
+      --section-bg: #f9f9f9;
+      --border-color: #eee;
+      --highlight: #e8f5e9;
+    }
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      padding: 40px 0;
+      background: linear-gradient(to right, #4CAF50, #2E7D32);
+      color: white;
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    h2 {
+      color: var(--primary-color);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+      margin-top: 40px;
+      font-size: 1.8rem;
+    }
+    h3 {
+      color: var(--primary-color);
+      margin-top: 25px;
+      font-size: 1.4rem;
+    }
+    .download-button {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      margin: 20px 0;
+      transition: all 0.3s ease;
+    }
+    .download-button:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .alert {
+      background-color: var(--highlight);
+      border-left: 4px solid var(--primary-color);
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    .box {
+      background-color: var(--section-bg);
+      border-radius: 8px;
+      padding: 25px;
+      margin: 20px 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .feature-card {
+      background-color: var(--section-bg);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .feature-card h3 {
+      margin-top: 0;
+      color: var(--primary-color);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+    th {
+      background-color: var(--highlight);
+      color: var(--primary-color);
+    }
+    .roadmap-timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .roadmap-timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: var(--primary-color);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+      border-radius: 3px;
+    }
+    .timeline-container {
+      padding: 10px 30px;
+      position: relative;
+      background-color: inherit;
+      width: 46%;
+    }
+    .timeline-container::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -10px;
+      background-color: white;
+      border: 4px solid var(--primary-color);
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    .left {
+      left: 0;
+    }
+    .right {
+      left: 50%;
+    }
+    .left::after {
+      left: auto;
+      right: -14px;
+    }
+    .right::after {
+      left: -14px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px;
+      background-color: var(--section-bg);
+      border-top: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      color: #666;
+    }
+    @media screen and (max-width: 768px) {
+      .roadmap-timeline::after {
+        left: 31px;
+      }
+      .timeline-container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+      .timeline-container::after {
+        left: 15px;
+      }
+      .left::after, .right::after {
+        left: 15px;
+      }
+      .right {
+        left: 0%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>🔥 ALEBRIJE Token Whitepaper</h1>
+      <p>Official Documentation v1.2 - June 2023</p>
+    </div>
+  </header>
+  
+  <div class="container">
+    <div class="alert">
+      <p>This is the web version of our whitepaper. For the complete PDF version with all technical details:</p>
+      <a href="/whitepaper.pdf" class="download-button" download="ALEBRIJE_Whitepaper.pdf">Download Full Whitepaper (PDF)</a>
+    </div>
+
+    <section>
+      <h2>Executive Summary</h2>
+      <p>ALEBRIJE is a deflationary token built on the Solana blockchain, designed to combine the speed and efficiency of Solana with innovative tokenomics that reward holders through automatic burns and staking rewards. Our mission is to create a sustainable ecosystem that provides real value to the community through utility, governance, and partnership integrations.</p>
+    </section>
+
+    <section>
+      <h2>Introduction</h2>
+      <p>The cryptocurrency space has evolved significantly since the inception of Bitcoin, with thousands of projects emerging to solve various problems and address different use cases. ALEBRIJE enters this landscape with a focus on community governance, sustainable tokenomics, and real-world utility through strategic partnerships and ecosystem development.</p>
+      
+      <p>ALEBRIJE is built on Solana, a high-performance blockchain capable of processing thousands of transactions per second with minimal fees, making it an ideal platform for our vision of widespread adoption and utility.</p>
+    </section>
+
+    <section>
+      <h2>Tokenomics</h2>
+      <div class="box">
+        <h3>Token Distribution</h3>
+        <table>
+          <tr>
+            <th>Allocation</th>
+            <th>Percentage</th>
+            <th>Tokens</th>
+            <th>Lock Period</th>
+          </tr>
+          <tr>
+            <td>Liquidity Pool</td>
+            <td>40%</td>
+            <td>400,000,000</td>
+            <td>Initial liquidity locked for 1 year</td>
+          </tr>
+          <tr>
+            <td>Development</td>
+            <td>25%</td>
+            <td>250,000,000</td>
+            <td>Vested over 24 months</td>
+          </tr>
+          <tr>
+            <td>Community Rewards</td>
+            <td>15%</td>
+            <td>150,000,000</td>
+            <td>Released for staking and airdrops</td>
+          </tr>
+          <tr>
+            <td>Marketing</td>
+            <td>10%</td>
+            <td>100,000,000</td>
+            <td>Vested over 12 months</td>
+          </tr>
+          <tr>
+            <td>Team</td>
+            <td>10%</td>
+            <td>100,000,000</td>
+            <td>Locked for 12 months, then vested over 12 months</td>
+          </tr>
+        </table>
+
+        <h3>Deflationary Mechanism</h3>
+        <p>ALEBRIJE implements a 2% burn on all transfers. This mechanism reduces the total supply over time, potentially increasing the value of remaining tokens.</p>
+        
+        <h3>Token Details</h3>
+        <ul>
+          <li><strong>Token Name:</strong> ALEBRIJE</li>
+          <li><strong>Total Supply:</strong> 1,000,000,000 ALEBRIJE</li>
+          <li><strong>Blockchain:</strong> Solana</li>
+          <li><strong>Token Type:</strong> SPL</li>
+          <li><strong>Decimals:</strong> 9</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Key Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Deflationary Mechanism</h3>
+          <p>ALEBRIJE implements a burn with every transaction, ensuring the token becomes more scarce over time. This decreasing supply mechanism is designed to create sustainable value appreciation.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Solana Integration</h3>
+          <p>Built on the Solana blockchain for fast, low-cost transactions. This allows for microtransactions and efficient trading without prohibitive gas fees.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Community Governance</h3>
+          <p>Token holders can participate in voting on major protocol decisions. This decentralized approach ensures the project evolves according to community needs.</p>
+        </div>
+        <div class="feature-card">
+          <h3>NFT Integration</h3>
+          <p>Special NFT releases planned that will provide exclusive benefits to holders. These will include staking bonuses, airdrops, and access to premium features.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Technical Implementation</h2>
+      <p>ALEBRIJE is implemented as an SPL token on the Solana blockchain with a custom program to handle special features like the burn mechanism and transfer taxes. The smart contract architecture consists of the following components:</p>
+      
+      <div class="box">
+        <h3>Core Components:</h3>
+        <ul>
+          <li><strong>Mint Authority:</strong> Controlled through multisig to ensure security</li>
+          <li><strong>Burn Mechanism:</strong> Custom program that automatically burns 2% of each transaction</li>
+          <li><strong>Transfer Logic:</strong> Implements the tax distribution to various protocol wallets</li>
+          <li><strong>Staking Contract:</strong> Allows users to earn rewards by locking their tokens</li>
+        </ul>
+        
+        <h3>Security Features:</h3>
+        <ul>
+          <li>Time-locked contracts for team and development funds</li>
+          <li>Multi-signature requirements for critical operations</li>
+          <li>Code audited by independent security researchers</li>
+          <li>Transparent and verifiable transaction mechanisms</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Roadmap</h2>
+      <div class="roadmap-timeline">
+        <div class="timeline-container left">
+          <div class="box">
+            <h3>Phase 1: Launch (Q3 2023)</h3>
+            <ul>
+              <li>Initial token distribution</li>
+              <li>Liquidity pool establishment</li>
+              <li>Community building</li>
+              <li>Website and social media launch</li>
+              <li>First CEX listing</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-container right">
+          <div class="box">
+            <h3>Phase 2: Growth (Q4 2023 - Q1 2024)</h3>
+            <ul>
+              <li>Additional exchange listings</li>
+              <li>Partnership announcements</li>
+              <li>Marketing campaigns</li>
+              <li>Community expansion</li>
+              <li>Initial staking program</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-container left">
+          <div class="box">
+            <h3>Phase 3: Utility (Q2 - Q3 2024)</h3>
+            <ul>
+              <li>NFT marketplace integration</li>
+              <li>Advanced staking platform launch</li>
+              <li>Governance implementation</li>
+              <li>Ecosystem partnerships</li>
+              <li>Mobile wallet app</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-container right">
+          <div class="box">
+            <h3>Phase 4: Expansion (Q4 2024+)</h3>
+            <ul>
+              <li>Cross-chain bridges</li>
+              <li>DeFi integrations</li>
+              <li>Enterprise partnerships</li>
+              <li>Real-world use case implementation</li>
+              <li>Global adoption initiatives</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Team</h2>
+      <p>The ALEBRIJE project is developed by a team of experienced blockchain developers, financial experts, and marketing professionals passionate about creating sustainable value in the cryptocurrency space.</p>
+      
+      <div class="box">
+        <h3>Core Team:</h3>
+        <ul>
+          <li><strong>Alex Morgan</strong> - Lead Developer & Founder</li>
+          <li><strong>Sarah Chen</strong> - Tokenomics & Financial Strategy</li>
+          <li><strong>Michael Rodriguez</strong> - Marketing & Community Management</li>
+          <li><strong>David Kim</strong> - Business Development</li>
+        </ul>
+        
+        <h3>Advisors:</h3>
+        <ul>
+          <li><strong>Dr. Jennifer Lee</strong> - Blockchain Technology</li>
+          <li><strong>Robert Thompson</strong> - DeFi Strategy</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Contact & Resources</h2>
+      <div class="box">
+        <ul>
+          <li><strong>Website:</strong> <a href="https://alebrije-inu.netlify.app" target="_blank">https://alebrije-inu.netlify.app</a></li>
+          <li><strong>Twitter:</strong> <a href="https://twitter.com/ALEBRIJE_Token" target="_blank">@ALEBRIJE_Token</a></li>
+          <li><strong>Telegram:</strong> <a href="https://t.me/ALEBRIJE_Token_Community" target="_blank">t.me/ALEBRIJE_Token_Community</a></li>
+          <li><strong>Discord:</strong> <a href="https://discord.gg/alebrijetoken" target="_blank">discord.gg/alebrijetoken</a></li>
+          <li><strong>Email:</strong> <a href="mailto:info@alebrije-token.com">info@alebrije-token.com</a></li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/ALEBRIJE-Token" target="_blank">github.com/ALEBRIJE-Token</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="alert">
+      <p>Download options:</p>
+      <ul>
+        <li><a href="/whitepaper.pdf" download="ALEBRIJE_Whitepaper.pdf">Direct Download (PDF)</a></li>
+        <li><a href="/whitepaper.pdf" target="_blank">Open PDF in New Tab</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2023 ALEBRIJE Token. All rights reserved.</p>
+      <p>Disclaimer: This document is for informational purposes only and does not constitute financial advice.</p>
+      <p>ALEBRIJE is a decentralized token. Always do your own research before investing.</p>
+    </div>
+  </footer>
+</body>
+</html> 

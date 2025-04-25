@@ -1,0 +1,22 @@
+[build]
+  publish = "/"
+
+# Define proper MIME types for PDFs
+[[headers]]
+  for = "*.pdf"
+  [headers.values]
+    Content-Type = "application/pdf"
+    Content-Disposition = "inline"
+    X-Content-Type-Options = "nosniff"
+
+# Handle redirects
+[[redirects]]
+  from = "/whitepaper"
+  to = "/whitepaper.html"
+  status = 200
+
+[[redirects]]
+  from = "/whitepaper.pdf"
+  to = "/whitepaper.pdf"
+  status = 200
+  force = true 

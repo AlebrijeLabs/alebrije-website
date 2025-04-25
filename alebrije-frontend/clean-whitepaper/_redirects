@@ -1,0 +1,5 @@
+# Serve the PDF with the correct Content-Type
+/whitepaper.pdf /whitepaper.pdf 200!
+
+# Handle direct /whitepaper path
+/whitepaper /whitepaper.pdf 302 
