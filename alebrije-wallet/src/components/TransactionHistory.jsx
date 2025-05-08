@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Table, Badge, Spinner, Button } from 'react-bootstrap';
+import { Card, Table, Badge, Spinner } from 'react-bootstrap';
 import TransactionHistoryService from '../services/transaction-history-service';
 import WalletService from '../services/wallet-service';
-import { ErrorDisplay } from './ErrorDisplay';
 import { formatDistance } from 'date-fns';
 
-const TransactionHistory = ({ tokenName }) => {
+const TransactionHistory = ({ tokenAddress }) => {
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   
   const loadTransactions = async () => {
     if (!WalletService.isConnected()) {
-      setError(new Error('Wallet not connected'));
+      setError('Wallet not connected');
       return;
     }
     
@@ -20,11 +19,11 @@ const TransactionHistory = ({ tokenName }) => {
     setError(null);
     
     try {
-      await TransactionHistoryService.initialize(tokenName);
-      const txHistory = await TransactionHistoryService.fetchTransactionHistory(tokenName);
+      await TransactionHistoryService.initialize(tokenAddress);
+      const txHistory = await TransactionHistoryService.fetchTransactionHistory(tokenAddress);
       setTransactions(txHistory);
     } catch (err) {
-      setError(err);
+      setError(err.message || 'Failed to load transactions');
       console.error('Failed to load transactions:', err);
     } finally {
       setIsLoading(false);
@@ -36,58 +35,36 @@ const TransactionHistory = ({ tokenName }) => {
       loadTransactions();
     }
     
-    // Cleanup on unmount
     return () => {
       TransactionHistoryService.cleanup();
     };
-  }, [tokenName]);
+  }, [tokenAddress]);
   
-  // Format address for display
   const formatAddress = (address) => {
     if (!address) return '';
     return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
   };
   
-  // Format time relative to now
   const formatTime = (timestamp) => {
     if (!timestamp) return '';
     return formatDistance(new Date(timestamp), new Date(), { addSuffix: true });
   };
   
-  if (!WalletService.isConnected()) {
-    return (
-      <Card className="transaction-history-card">
-        <Card.Body>
-          <Card.Title>{tokenName} Transaction History</Card.Title>
-          <div className="text-center text-muted">
-            Connect your wallet to view transaction history
-          </div>
-        </Card.Body>
-      </Card>
-    );
-  }
-  
   return (
-    <Card className="transaction-history-card">
+    <Card>
       <Card.Body>
-        <Card.Title className="d-flex justify-content-between align-items-center">
-          {tokenName} Transaction History
-          <Button 
-            variant="link" 
-            size="sm" 
-            onClick={loadTransactions}
-            disabled={isLoading}
-          >
-            🔄
-          </Button>
-        </Card.Title>
+        <Card.Title>Transaction History</Card.Title>
         
         {error && (
-          <ErrorDisplay 
-            error={error} 
-            onDismiss={() => setError(null)} 
-            onRetry={loadTransactions} 
-          />
+          <div className="alert alert-danger">
+            {error}
+            <button 
+              className="btn btn-link btn-sm float-end" 
+              onClick={loadTransactions}
+            >
+              Retry
+            </button>
+          </div>
         )}
         
         {isLoading ? (
@@ -100,8 +77,8 @@ const TransactionHistory = ({ tokenName }) => {
             No transactions found
           </div>
         ) : (
-          <div className="transaction-table-container">
-            <Table hover responsive className="transaction-table">
+          <div className="table-responsive">
+            <Table hover>
               <thead>
                 <tr>
                   <th>Type</th>
@@ -113,13 +90,13 @@ const TransactionHistory = ({ tokenName }) => {
               </thead>
               <tbody>
                 {transactions.map((tx) => (
-                  <tr key={tx.hash} className={tx.isIncoming ? 'incoming-tx' : 'outgoing-tx'}>
+                  <tr key={tx.hash}>
                     <td>
                       <Badge bg={tx.isIncoming ? 'success' : 'primary'}>
                         {tx.isIncoming ? 'Received' : 'Sent'}
                       </Badge>
                     </td>
-                    <td className="amount-cell">
+                    <td>
                       <span className={tx.isIncoming ? 'text-success' : 'text-primary'}>
                         {tx.isIncoming ? '+' : '-'}{tx.value}
                       </span>
@@ -140,9 +117,7 @@ const TransactionHistory = ({ tokenName }) => {
                           'danger'
                         }
                       >
-                        {tx.status === 'confirmed' ? 'Confirmed' : 
-                         tx.status === 'pending' ? 'Pending' : 
-                         'Failed'}
+                        {tx.status}
                       </Badge>
                     </td>
                   </tr>

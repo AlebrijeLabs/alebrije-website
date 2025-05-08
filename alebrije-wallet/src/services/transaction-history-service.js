@@ -1,7 +1,7 @@
 import WalletService from './wallet-service';
 import TokenService from './token-service';
 import config from '../config';
-import { handleWalletError, ErrorTypes, AlebrijeError } from '../utils/error-handler';
+import { handleError, ErrorTypes, AlebrijeError } from '../utils/error-handler';
 
 class TransactionHistoryService {
   constructor() {
@@ -72,7 +72,7 @@ class TransactionHistoryService {
       
       return transactions;
     } catch (error) {
-      throw handleWalletError(error, `Failed to fetch transaction history for ${tokenName}`);
+      throw handleError(error, `Failed to fetch transaction history for ${tokenName}`);
     } finally {
       this.isLoading = false;
     }

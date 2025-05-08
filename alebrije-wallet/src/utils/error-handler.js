@@ -1,18 +1,15 @@
 /**
- * Error types for the Alebrije wallet
+ * Error types for the application
  */
 export const ErrorTypes = {
-  CONNECTION: 'CONNECTION_ERROR',
-  TRANSACTION: 'TRANSACTION_ERROR',
-  CONTRACT: 'CONTRACT_ERROR',
-  WALLET: 'WALLET_ERROR',
-  NETWORK: 'NETWORK_ERROR',
-  USER: 'USER_ERROR',
-  UNKNOWN: 'UNKNOWN_ERROR'
+  NETWORK: 'NETWORK',
+  WALLET: 'WALLET',
+  USER: 'USER',
+  UNKNOWN: 'UNKNOWN'
 };
 
 /**
- * Custom error class for Alebrije wallet
+ * Custom error class for Alebrije Wallet
  */
 export class AlebrijeError extends Error {
   constructor(message, type = ErrorTypes.UNKNOWN, originalError = null) {
@@ -20,53 +17,48 @@ export class AlebrijeError extends Error {
     this.name = 'AlebrijeError';
     this.type = type;
     this.originalError = originalError;
-    this.timestamp = new Date();
-  }
-  
-  /**
-   * Get a user-friendly error message
-   */
-  getUserMessage() {
-    switch (this.type) {
-      case ErrorTypes.CONNECTION:
-        return 'Failed to connect to the network. Please check your internet connection and try again.';
-      
-      case ErrorTypes.TRANSACTION:
-        return 'Transaction failed. This could be due to insufficient funds or network congestion.';
-      
-      case ErrorTypes.CONTRACT:
-        return 'Smart contract interaction failed. The operation could not be completed.';
-      
-      case ErrorTypes.WALLET:
-        return 'Wallet error. Please make sure your wallet is properly set up and try again.';
-      
-      case ErrorTypes.NETWORK:
-        return 'Network error. Please check if you are connected to the correct blockchain network.';
-      
-      case ErrorTypes.USER:
-        return this.message; // For user errors, show the actual message
-      
-      default:
-        return 'An unexpected error occurred. Please try again later.';
-    }
-  }
-  
-  /**
-   * Get technical details for logging
-   */
-  getTechnicalDetails() {
-    return {
-      type: this.type,
-      message: this.message,
-      originalError: this.originalError ? {
-        name: this.originalError.name,
-        message: this.originalError.message,
-        stack: this.originalError.stack
-      } : null,
-      timestamp: this.timestamp
-    };
   }
 }
+
+/**
+ * Handle and transform errors from various sources
+ * @param {Error} error - Original error object
+ * @param {string} message - Custom message for the error
+ * @returns {AlebrijeError} - Transformed error
+ */
+export const handleError = (error, message = '') => {
+  console.error('Error:', error);
+  
+  // If it's already an AlebrijeError, just return it
+  if (error instanceof AlebrijeError) {
+    return error;
+  }
+  
+  // Determine error type
+  let errorType = ErrorTypes.UNKNOWN;
+  
+  // Check for network errors
+  if (error.message && (
+    error.message.includes('Network') ||
+    error.message.includes('timeout') ||
+    error.message.includes('connection')
+  )) {
+    errorType = ErrorTypes.NETWORK;
+  }
+  
+  // Check for wallet-related errors
+  else if (error.message && (
+    error.message.includes('wallet') ||
+    error.message.includes('account') ||
+    error.message.includes('signature')
+  )) {
+    errorType = ErrorTypes.WALLET;
+  }
+  
+  // Create new error with context
+  const finalMessage = message ? `${message}: ${error.message}` : error.message;
+  return new AlebrijeError(finalMessage, errorType, error);
+};
 
 /**
  * Error handler for wallet operations
@@ -131,53 +123,12 @@ export const handleWalletError = (error, defaultMessage = 'Operation failed') =>
     errorType = ErrorTypes.USER;
     errorMessage = 'Transaction was rejected';
   } else if (errorString.includes('network') || errorString.includes('connection')) {
-    errorType = ErrorTypes.CONNECTION;
+    errorType = ErrorTypes.NETWORK;
     errorMessage = 'Network connection error';
   } else if (errorString.includes('timeout')) {
-    errorType = ErrorTypes.CONNECTION;
+    errorType = ErrorTypes.NETWORK;
     errorMessage = 'Request timed out. The network may be congested.';
   }
   
   return new AlebrijeError(errorMessage, errorType, error);
-};
-
-/**
- * Error boundary component for React
- */
-export const withErrorBoundary = (WrappedComponent, fallbackUI) => {
-  return class ErrorBoundary extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = { hasError: false, error: null };
-    }
-
-    static getDerivedStateFromError(error) {
-      return { hasError: true, error };
-    }
-
-    componentDidCatch(error, errorInfo) {
-      console.error('Component error:', error, errorInfo);
-      // You could also log to an error reporting service here
-    }
-
-    render() {
-      if (this.state.hasError) {
-        const error = this.state.error instanceof AlebrijeError 
-          ? this.state.error 
-          : new AlebrijeError('Component error', ErrorTypes.UNKNOWN, this.state.error);
-        
-        return fallbackUI ? fallbackUI(error) : (
-          <div className="error-boundary">
-            <h3>Something went wrong</h3>
-            <p>{error.getUserMessage()}</p>
-            <button onClick={() => this.setState({ hasError: false, error: null })}>
-              Try Again
-            </button>
-          </div>
-        );
-      }
-
-      return <WrappedComponent {...this.props} />;
-    }
-  };
 }; 
