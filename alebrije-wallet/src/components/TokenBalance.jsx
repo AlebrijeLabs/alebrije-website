@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Spinner, Button } from 'react-bootstrap';
+import { Card, Spinner } from 'react-bootstrap';
 import TokenService from '../services/token-service';
 import WalletService from '../services/wallet-service';
 
-const TokenBalance = ({ tokenName }) => {
+const TokenBalance = ({ tokenAddress = 'native' }) => {
   const [balance, setBalance] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -20,12 +20,18 @@ const TokenBalance = ({ tokenName }) => {
     
     try {
       const account = WalletService.getCurrentAccount();
-      const balanceValue = await TokenService.getBalance(tokenName, account);
+      let balanceValue;
+      
+      if (tokenAddress === 'native') {
+        balanceValue = await TokenService.getNativeBalance(account);
+      } else {
+        balanceValue = await TokenService.getTokenBalance(tokenAddress, account);
+      }
+      
       setBalance(balanceValue);
       
-      // Get token info if not already loaded
       if (!tokenInfo) {
-        const info = TokenService.getTokenInfo(tokenName);
+        const info = await TokenService.getTokenInfo(tokenAddress);
         if (info) {
           setTokenInfo(info);
         }
@@ -43,7 +49,6 @@ const TokenBalance = ({ tokenName }) => {
       loadBalance();
     }
     
-    // Subscribe to account changes
     const unsubscribe = WalletService.onAccountsChanged(() => {
       loadBalance();
     });
@@ -51,57 +56,29 @@ const TokenBalance = ({ tokenName }) => {
     return () => {
       if (unsubscribe) unsubscribe();
     };
-  }, [tokenName]);
-  
-  if (!WalletService.isConnected()) {
-    return (
-      <Card className="token-balance-card">
-        <Card.Body>
-          <Card.Title>{tokenName || 'Token'} Balance</Card.Title>
-          <div className="text-center text-muted">
-            Connect your wallet to view balance
-          </div>
-        </Card.Body>
-      </Card>
-    );
-  }
+  }, [tokenAddress]);
   
   return (
-    <Card className="token-balance-card">
+    <Card>
       <Card.Body>
-        <Card.Title>
-          {tokenInfo?.symbol || tokenName || 'Token'} Balance
-          <Button 
-            variant="link" 
-            size="sm" 
-            className="refresh-button"
-            onClick={loadBalance}
-            disabled={isLoading}
-          >
-            🔄
-          </Button>
-        </Card.Title>
+        <Card.Title>Balance</Card.Title>
         
-        {isLoading ? (
-          <div className="text-center">
-            <Spinner animation="border" size="sm" />
-          </div>
-        ) : error ? (
-          <div className="text-danger">{error}</div>
-        ) : (
-          <div className="balance-display">
-            <span className="balance-amount">{balance || '0'}</span>
-            <span className="balance-symbol">{tokenInfo?.symbol || tokenName}</span>
-          </div>
-        )}
+        {error && <div className="alert alert-danger">{error}</div>}
         
-        {tokenInfo && (
-          <div className="token-info">
-            <small className="text-muted">
-              {tokenInfo.name} • {tokenInfo.decimals} decimals
-            </small>
+        <div className="mb-4">
+          <div className="d-flex justify-content-between align-items-center">
+            <div>
+              <strong>{tokenAddress === 'native' ? 'SOL' : tokenInfo?.symbol || 'Tokens'}</strong>
+              <div className="text-muted">
+                {isLoading ? (
+                  <Spinner animation="border" size="sm" />
+                ) : (
+                  `${balance !== null ? balance : '0'} ${tokenAddress === 'native' ? 'SOL' : tokenInfo?.symbol || 'tokens'}`
+                )}
+              </div>
+            </div>
           </div>
-        )}
+        </div>
       </Card.Body>
     </Card>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Alert, Spinner } from 'react-bootstrap';
+import { Button, Alert } from 'react-bootstrap';
 import WalletService from '../services/wallet-service';
 
 const WalletConnect = () => {
@@ -8,7 +8,6 @@ const WalletConnect = () => {
   const [accounts, setAccounts] = useState([]);
   
   useEffect(() => {
-    // Check if already connected
     if (WalletService.isConnected()) {
       setAccounts(WalletService.getAccounts());
     }
@@ -23,10 +22,10 @@ const WalletConnect = () => {
       if (success) {
         setAccounts(WalletService.getAccounts());
       } else {
-        setError('Failed to connect wallet');
+        setError('Failed to connect wallet. Please try again.');
       }
     } catch (err) {
-      setError(err.message || 'An error occurred while connecting');
+      setError(err.message || 'An error occurred while connecting to your wallet.');
       console.error('Connection error:', err);
     } finally {
       setIsConnecting(false);
@@ -34,8 +33,13 @@ const WalletConnect = () => {
   };
   
   const handleDisconnect = async () => {
-    await WalletService.disconnect();
-    setAccounts([]);
+    try {
+      await WalletService.disconnect();
+      setAccounts([]);
+    } catch (err) {
+      console.error('Disconnect error:', err);
+      setError('Failed to disconnect wallet. Please try again.');
+    }
   };
   
   const formatAddress = (address) => {
@@ -43,53 +47,50 @@ const WalletConnect = () => {
     return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
   };
   
-  return (
-    <div className="wallet-connect-container">
-      {error && <Alert variant="danger">{error}</Alert>}
-      
-      {accounts.length > 0 ? (
-        <div className="connected-wallet">
-          <div className="account-info">
-            <span className="account-label">Connected Account:</span>
-            <span className="account-address">{formatAddress(accounts[0])}</span>
-            <Button 
-              variant="link" 
-              size="sm"
-              onClick={() => navigator.clipboard.writeText(accounts[0])}
-              title="Copy address"
-            >
-              📋
-            </Button>
-          </div>
-          <Button 
-            variant="outline-danger" 
-            onClick={handleDisconnect}
-            size="sm"
-          >
-            Disconnect
-          </Button>
-        </div>
-      ) : (
-        <Button 
-          variant="primary" 
-          onClick={handleConnect}
-          disabled={isConnecting}
-        >
-          {isConnecting ? (
-            <>
-              <Spinner
-                as="span"
-                animation="border"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-              />
-              <span className="ms-2">Connecting...</span>
-            </>
-          ) : (
-            'Connect Wallet'
-          )}
-        </Button>
+  return accounts.length > 0 ? (
+    <div className="wallet-connected">
+      <div className="d-flex align-items-center mb-3">
+        <div className="wallet-status-indicator connected me-2"></div>
+        <span className="text-success">Connected</span>
+      </div>
+      <div className="wallet-address mb-3">
+        <small className="text-muted d-block mb-1">Wallet Address:</small>
+        <code className="d-block text-break">{accounts[0]}</code>
+      </div>
+      <Button 
+        variant="outline-danger" 
+        onClick={handleDisconnect}
+        className="disconnect-button w-100"
+      >
+        <i className="bi bi-x-circle me-2"></i>
+        Disconnect Wallet
+      </Button>
+    </div>
+  ) : (
+    <div className="wallet-connect">
+      <Button 
+        variant="primary" 
+        onClick={handleConnect}
+        disabled={isConnecting}
+        className="connect-button w-100"
+      >
+        {isConnecting ? (
+          <>
+            <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            Connecting...
+          </>
+        ) : (
+          <>
+            <i className="bi bi-wallet2 me-2"></i>
+            Connect Wallet
+          </>
+        )}
+      </Button>
+      {error && (
+        <Alert variant="danger" className="mt-3 mb-0">
+          <i className="bi bi-exclamation-triangle me-2"></i>
+          {error}
+        </Alert>
       )}
     </div>
   );
