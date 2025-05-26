@@ -1,13 +1,14 @@
-# XOLO Token Frontend
+# ALBJ Token Frontend
 
-A React application for interacting with XOLO tokens on the Solana blockchain.
+A React application for interacting with ALBJ tokens on the Solana blockchain.
 
 ## Features
 
-- Token burning
-- Token transfers
-- Whitepaper access
-- Wallet connection with Phantom
+- Connect to Solana wallet (Phantom, Solflare)
+- View token and SOL balances
+- Transfer ALBJ tokens
+- View transaction history
+- Token information display
 
 ## Tech Stack
 
@@ -18,22 +19,18 @@ A React application for interacting with XOLO tokens on the Solana blockchain.
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 16+
-- npm or yarn
-
-### Installation
-
+1. Install dependencies:
 ```bash
-# Install dependencies
 npm install
 ```
 
-### Running Locally
-
+2. Create a `.env` file based on `.env.example`:
 ```bash
-# Start development server
+cp .env.example .env
+```
+
+3. Start the development server:
+```bash
 npm run dev
 ```
 
@@ -48,25 +45,21 @@ npm run build
 
 The build output will be in the `dist` directory.
 
-## Deploying to Netlify
+## Deployment
 
-This project includes a custom deployment script to ensure large files like the whitepaper are handled correctly.
+The application is configured for deployment on Netlify. See `DEPLOYMENT-INSTRUCTIONS.md` for detailed steps.
 
-### Using the Deployment Script
+## Contributing
 
-```bash
-# Make the script executable (if needed)
-chmod +x deploy.sh
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-# Run the deployment script
-./deploy.sh
-```
+## License
 
-### Manual Deployment
-
-1. Build the project: `npm run build`
-2. Install Netlify CLI: `npm install -g netlify-cli`
-3. Deploy to Netlify: `netlify deploy --prod`
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Whitepaper Access
 
@@ -96,6 +89,21 @@ If the development server shows a blank page:
 3. Try clearing your browser cache or using incognito mode
 4. Restart the development server with `npm run dev`
 
-## License
+## Test Deployment
+Testing CI/CD pipeline with Netlify deployment.
 
-MIT
+## Development
+```bash
+npm install
+npm run dev
+```
+
+## Build
+```bash
+npm run build
+```
+
+## Test
+```bash
+npm test
+```
