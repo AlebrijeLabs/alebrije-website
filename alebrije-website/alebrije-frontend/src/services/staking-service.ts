@@ -18,7 +18,7 @@ export interface StakingPool {
 
 export async function getStakingInfo(walletAddress: PublicKey): Promise<StakingInfo> {
   try {
-    const connection = new Connection(process.env.SOLANA_RPC_URL || 'https://api.devnet.solana.com');
+    const connection = new Connection(process.env.REACT_APP_SOLANA_RPC_URL || 'https://api.devnet.solana.com');
     // TODO: Implement actual staking info retrieval from the blockchain
     return {
       stakedAmount: 0,
@@ -35,7 +35,7 @@ export async function getStakingInfo(walletAddress: PublicKey): Promise<StakingI
 
 export async function getStakingPool(): Promise<StakingPool> {
   try {
-    const connection = new Connection(process.env.SOLANA_RPC_URL || 'https://api.devnet.solana.com');
+    const connection = new Connection(process.env.REACT_APP_SOLANA_RPC_URL || 'https://api.devnet.solana.com');
     // TODO: Implement actual staking pool info retrieval from the blockchain
     return {
       totalStaked: 0,
@@ -51,7 +51,8 @@ export async function getStakingPool(): Promise<StakingPool> {
 
 export async function stakeTokens(
   walletAddress: PublicKey,
-  amount: number
+  amount: number,
+  connection: Connection
 ): Promise<string> {
   try {
     if (amount < STAKING_CONFIG.MIN_STAKE_AMOUNT) {
@@ -61,9 +62,11 @@ export async function stakeTokens(
       throw new Error(`Maximum stake amount is ${STAKING_CONFIG.MAX_STAKE_AMOUNT} ALBJ`);
     }
 
-    const connection = new Connection(process.env.SOLANA_RPC_URL || 'https://api.devnet.solana.com');
     // TODO: Implement actual staking transaction
-    throw new Error('Staking not implemented yet');
+    const transaction = new Transaction();
+    // Add staking instructions here
+    
+    return transaction.serialize().toString('base64');
   } catch (error) {
     console.error('Error staking tokens:', error);
     throw error;
@@ -72,23 +75,31 @@ export async function stakeTokens(
 
 export async function unstakeTokens(
   walletAddress: PublicKey,
-  amount: number
+  amount: number,
+  connection: Connection
 ): Promise<string> {
   try {
-    const connection = new Connection(process.env.SOLANA_RPC_URL || 'https://api.devnet.solana.com');
     // TODO: Implement actual unstaking transaction
-    throw new Error('Unstaking not implemented yet');
+    const transaction = new Transaction();
+    // Add unstaking instructions here
+    
+    return transaction.serialize().toString('base64');
   } catch (error) {
     console.error('Error unstaking tokens:', error);
     throw error;
   }
 }
 
-export async function claimRewards(walletAddress: PublicKey): Promise<string> {
+export async function claimRewards(
+  walletAddress: PublicKey,
+  connection: Connection
+): Promise<string> {
   try {
-    const connection = new Connection(process.env.SOLANA_RPC_URL || 'https://api.devnet.solana.com');
     // TODO: Implement actual reward claiming transaction
-    throw new Error('Reward claiming not implemented yet');
+    const transaction = new Transaction();
+    // Add reward claiming instructions here
+    
+    return transaction.serialize().toString('base64');
   } catch (error) {
     console.error('Error claiming rewards:', error);
     throw error;
