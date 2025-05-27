@@ -46,3 +46,9 @@ coverage/
 *.log
 *.tmp
 *.temp
+node_modules/.cache/
+node_modules/
+.cache/
+*.pack
+*.log
+.DS_Store
