@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALEBRIJE Inu - Whitepaper</title>
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="theme-color" content="#4CAF50" />
+  <meta name="description" content="ALEBRIJE Token - The meme coin inspired by the Xoloitzcuintli dog breed" />
+  <meta property="og:title" content="ALEBRIJE Inu Token" />
+  <meta property="og:description" content="The meme coin inspired by the Xolo — launching Cinco de Mayo" />
+  <meta property="og:image" content="/logo512.png" />
+  <link rel="apple-touch-icon" href="/logo192.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background-color: #f5f5f5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    .site-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
+      padding: 20px 0;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .logo {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 15px;
+    }
+    .site-title {
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin: 0;
+      color: #333;
+    }
+    .site-tagline {
+      font-size: 1rem;
+      color: #666;
+      margin: 5px 0 0 0;
+    }
+    h1 {
+      color: #4CAF50;
+      margin-bottom: 20px;
+    }
+    .button {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      margin: 10px;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+    .pdf-container {
+      width: 100%;
+      height: 700px;
+      margin: 20px 0;
+      border: 1px solid #ddd;
+      background-color: white;
+    }
+    .options {
+      margin: 20px 0;
+    }
+    .card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .note {
+      padding: 15px;
+      background-color: #f8f8f8;
+      border-left: 4px solid #4CAF50;
+      margin: 20px 0;
+      text-align: left;
+    }
+    .version {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 10px;
+    }
+    .viewer-options {
+      display: flex;
+      margin-bottom: 15px;
+      justify-content: center;
+      gap: 10px;
+    }
+    .viewer-option {
+      padding: 8px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #f9f9f9;
+    }
+    .viewer-option.active {
+      background: #e8f5e9;
+      border-color: #4CAF50;
+      font-weight: bold;
+    }
+    .hidden {
+      display: none;
+    }
+    .loading {
+      text-align: center;
+      padding: 20px;
+      font-style: italic;
+      color: #666;
+    }
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 4px solid #4CAF50;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+      color: #777;
+      font-size: 0.9rem;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <img src="/logo512.png" alt="ALEBRIJE Inu Logo" class="logo">
+      <h1 class="site-title">Welcome to ALEBRIJE Inu</h1>
+      <p class="site-tagline">The meme coin inspired by the Xoloitzcuintli dog breed</p>
+    </header>
+    
+    <main>
+      <div class="header">
+        <h1>ALEBRIJE Whitepaper</h1>
+        <p class="version">Updated: May 3, 2024</p>
+      </div>
+    
+    <div class="options">
+      <a href="whitepaper.pdf?v=3" class="button" download="ALEBRIJE_Whitepaper.pdf">Download PDF</a>
+      <a href="whitepaper.pdf?v=3" class="button" target="_blank">Open in New Tab</a>
+    </div>
+    
+    <div class="card">
+      <p>View the ALEBRIJE whitepaper directly below:</p>
+      
+      <div class="viewer-options">
+        <div class="viewer-option active" data-viewer="object">Default Viewer</div>
+        <div class="viewer-option" data-viewer="iframe">Alternative Viewer</div>
+        <div class="viewer-option" data-viewer="google">Google Docs Viewer</div>
+      </div>
+      
+      <div id="object-viewer">
+        <object data="whitepaper.pdf?v=3" type="application/pdf" class="pdf-container">
+          <div class="note">
+            <p>It appears your browser doesn't support embedded PDFs or the file is still loading.</p>
+            <p>Please try an alternative viewing option above, or <a href="whitepaper.pdf?v=3" download="ALEBRIJE_Whitepaper.pdf">download the whitepaper</a>.</p>
+          </div>
+        </object>
+      </div>
+      
+      <div id="iframe-viewer" class="hidden">
+        <iframe src="whitepaper.pdf?v=3" class="pdf-container"></iframe>
+      </div>
+      
+      <div id="google-viewer" class="hidden">
+        <div class="loading">
+          <div class="spinner"></div>
+          <p>Loading Google Docs Viewer... This may take a few moments.</p>
+          <p>If it doesn't load, please try another viewing option or download the PDF directly.</p>
+        </div>
+        <iframe src="https://docs.google.com/viewer?url=https://alebrije-whitepaper.netlify.app/whitepaper.pdf?v=4&embedded=true" class="pdf-container"></iframe>
+        <div style="margin-top: 15px; padding: 10px; background-color: #fff9e6; border: 1px solid #ffe58f; border-radius: 4px;">
+          <p>If the Google Docs Viewer doesn't appear above, you can also:</p>
+          <a href="https://docs.google.com/viewer?url=https://alebrije-whitepaper.netlify.app/whitepaper.pdf?v=4" target="_blank" class="button" style="background-color: #2196F3;">Open in Google Docs (New Tab)</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="note">
+      <p><strong>About this whitepaper:</strong> This document provides comprehensive information about the ALEBRIJE token, including tokenomics, roadmap, and technical specifications.</p>
+    </div>
+    
+    <footer class="footer">
+      <p>© 2024 ALEBRIJE Inu. All rights reserved.</p>
+      <p><a href="https://alebrije-inu.netlify.app/" style="color: #4CAF50; text-decoration: none;">Back to Main Site</a></p>
+    </footer>
+  </main>
+  </div>
+
+  <script>
+    // Add cache-busting parameters
+    window.onload = function() {
+      const timestamp = new Date().getTime();
+      
+      // Update links with timestamp
+      const links = document.querySelectorAll('a[href*="whitepaper.pdf"]');
+      links.forEach(link => {
+        const originalHref = link.getAttribute('href').split('?')[0];
+        link.setAttribute('href', `${originalHref}?v=${timestamp}`);
+      });
+      
+      // Update object data attribute
+      const pdfObject = document.querySelector('object[data*="whitepaper.pdf"]');
+      if (pdfObject) {
+        const originalData = pdfObject.getAttribute('data').split('?')[0];
+        pdfObject.setAttribute('data', `${originalData}?v=${timestamp}`);
+      }
+      
+      // Update iframe src attribute
+      const pdfIframe = document.querySelector('#iframe-viewer iframe');
+      if (pdfIframe) {
+        const originalSrc = pdfIframe.getAttribute('src').split('?')[0];
+        pdfIframe.setAttribute('src', `${originalSrc}?v=${timestamp}`);
+      }
+      
+      // Update Google Docs Viewer iframe with timestamp and better URL format
+      const googleIframe = document.querySelector('#google-viewer iframe');
+      if (googleIframe) {
+        // Create a more reliable Google Docs viewer URL
+        const pdfUrl = `https://alebrije-whitepaper.netlify.app/whitepaper.pdf?v=${timestamp}`;
+        const encodedUrl = encodeURIComponent(pdfUrl);
+        const googleViewerUrl = `https://docs.google.com/viewer?url=${encodedUrl}&embedded=true&rand=${timestamp}`;
+        
+        // Set the iframe source
+        googleIframe.setAttribute('src', googleViewerUrl);
+        
+        // Also update the direct link
+        const directGoogleLink = document.querySelector('#google-viewer a[target="_blank"]');
+        if (directGoogleLink) {
+          directGoogleLink.setAttribute('href', `https://docs.google.com/viewer?url=${encodedUrl}`);
+        }
+        
+        // Add timeout to show fallback message if Google Docs viewer doesn't load
+        setTimeout(function() {
+          // Check if the iframe has loaded content
+          try {
+            const iframeContent = googleIframe.contentDocument || googleIframe.contentWindow.document;
+            if (!iframeContent || iframeContent.documentElement.innerHTML === '') {
+              showGoogleViewerFallback();
+            }
+          } catch (e) {
+            // If we can't access the iframe content due to CORS, assume it might not have loaded properly
+            showGoogleViewerFallback();
+          }
+        }, 8000); // 8 seconds timeout
+        
+        // Hide loading indicator once iframe loads
+        googleIframe.addEventListener('load', function() {
+          const loadingIndicator = document.querySelector('#google-viewer .loading');
+          if (loadingIndicator) {
+            loadingIndicator.style.display = 'none';
+          }
+          
+          // Try again to check if content actually loaded
+          setTimeout(function() {
+            try {
+              const iframeContent = googleIframe.contentDocument || googleIframe.contentWindow.document;
+              if (!iframeContent || iframeContent.documentElement.innerHTML === '') {
+                showGoogleViewerFallback();
+              }
+            } catch (e) {
+              // Ignore CORS errors
+            }
+          }, 500);
+        });
+      }
+      
+      // Function to show fallback message for Google Docs viewer
+      function showGoogleViewerFallback() {
+        const fallbackMessage = document.querySelector('#google-viewer div[style*="background-color: #fff9e6"]');
+        if (fallbackMessage) {
+          fallbackMessage.style.display = 'block';
+          fallbackMessage.style.padding = '20px';
+          fallbackMessage.style.marginTop = '0';
+          fallbackMessage.style.fontWeight = 'bold';
+        }
+      }
+      
+      // Set up viewer options
+      const viewerOptions = document.querySelectorAll('.viewer-option');
+      viewerOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Remove active class from all options
+          viewerOptions.forEach(opt => opt.classList.remove('active'));
+          
+          // Add active class to clicked option
+          this.classList.add('active');
+          
+          // Hide all viewers
+          document.getElementById('object-viewer').classList.add('hidden');
+          document.getElementById('iframe-viewer').classList.add('hidden');
+          document.getElementById('google-viewer').classList.add('hidden');
+          
+          // Show selected viewer
+          const viewerType = this.getAttribute('data-viewer');
+          document.getElementById(`${viewerType}-viewer`).classList.remove('hidden');
+          
+          // Show loading indicator when switching to Google Docs viewer
+          if (viewerType === 'google') {
+            const loadingIndicator = document.querySelector('#google-viewer .loading');
+            if (loadingIndicator) {
+              loadingIndicator.style.display = 'block';
+            }
+            
+            // Hide fallback message when switching
+            const fallbackMessage = document.querySelector('#google-viewer div[style*="background-color: #fff9e6"]');
+            if (fallbackMessage) {
+              fallbackMessage.style.display = 'none';
+            }
+          }
+        });
+      });
+    };
+  </script>
+</body>
+</html> 

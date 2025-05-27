@@ -1,0 +1,51 @@
+{
+  "name": "alebrije-project",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@solana/spl-token": "^0.1.8",
+    "@solana/wallet-adapter-base": "^0.9.23",
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "@solana/wallet-adapter-react-ui": "^0.9.34",
+    "@solana/wallet-adapter-wallets": "^0.19.22",
+    "@solana/web3.js": "^1.98.2",
+    "bootstrap": "^5.3.2",
+    "i18next": "^25.1.2",
+    "i18next-browser-languagedetector": "^8.1.0",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.9.1",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^15.5.1",
+    "react-router-dom": "^6.20.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.7",
+    "@babel/plugin-transform-react-jsx": "^7.27.1",
+    "@babel/plugin-transform-runtime": "^7.23.7",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.23.7",
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.1",
+    "@types/jest": "^29.5.11",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "babel-jest": "^29.7.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "process": "^0.11.10",
+    "stream-browserify": "^3.0.0",
+    "typescript": "^5.3.3",
+    "util": "^0.12.5",
+    "vite": "^6.3.5"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  }
+}

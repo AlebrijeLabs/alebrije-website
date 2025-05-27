@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALEBRIJE Whitepaper</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      color: #333;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      color: #4CAF50;
+      margin-bottom: 20px;
+    }
+    .button {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      margin: 10px;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+    .pdf-container {
+      width: 100%;
+      height: 600px;
+      margin: 20px 0;
+      border: 1px solid #ddd;
+      background-color: white;
+    }
+    .options {
+      margin: 20px 0;
+    }
+    .card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .alternatives {
+      margin-top: 30px;
+      text-align: left;
+      padding: 0 20px;
+    }
+    .alternatives h3 {
+      color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+  <h1>ALEBRIJE Whitepaper</h1>
+  
+  <div class="options">
+    <a href="whitepaper.pdf" class="button" download="ALEBRIJE_Whitepaper.pdf">Download PDF</a>
+    <a href="whitepaper.pdf" class="button" target="_blank">Open in New Tab</a>
+    <a href="whitepaper.html" class="button">View HTML Version</a>
+  </div>
+  
+  <div class="card">
+    <p>You can view the whitepaper directly below:</p>
+    
+    <object data="whitepaper.pdf" type="application/pdf" class="pdf-container">
+      <p>It appears your browser doesn't support embedded PDFs.</p>
+      <p>You can <a href="whitepaper.pdf" download="ALEBRIJE_Whitepaper.pdf">download the PDF</a> or <a href="whitepaper.html">view the HTML version</a>.</p>
+    </object>
+  </div>
+  
+  <div class="alternatives">
+    <h3>Having trouble viewing the PDF?</h3>
+    <p>If you're experiencing issues with the PDF viewer above, here are some alternative options:</p>
+    
+    <ol>
+      <li><strong>Direct link:</strong> <a href="whitepaper.pdf">Open PDF directly</a></li>
+      <li><strong>HTML version:</strong> <a href="whitepaper.html">View our HTML whitepaper</a></li>
+      <li><strong>Download:</strong> <a href="whitepaper.pdf" download="ALEBRIJE_Whitepaper.pdf">Save the PDF</a> to your device</li>
+      <li><strong>Google Docs Viewer:</strong> <a href="https://docs.google.com/viewer?url=https://YOUR-NETLIFY-SITE.netlify.app/whitepaper.pdf" target="_blank">View through Google Docs</a> (replace YOUR-NETLIFY-SITE with your actual Netlify site name)</li>
+    </ol>
+    
+    <p>If you continue to experience issues, please contact our support team at <a href="mailto:support@alebrije-inu.com">support@alebrije-inu.com</a>.</p>
+  </div>
+  
+  <script>
+    // Add JavaScript to detect if PDF fails to load
+    document.addEventListener('DOMContentLoaded', function() {
+      const pdfObject = document.querySelector('object[data="whitepaper.pdf"]');
+      
+      // If the PDF fails to load, we'll make the alternatives section more prominent
+      pdfObject.addEventListener('error', function() {
+        document.querySelector('.alternatives').style.backgroundColor = '#fff9e6';
+        document.querySelector('.alternatives').style.padding = '20px';
+        document.querySelector('.alternatives').style.border = '1px solid #ffe58f';
+      });
+    });
+  </script>
+</body>
+</html> 

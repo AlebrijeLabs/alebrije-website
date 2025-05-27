@@ -1,0 +1,49 @@
+# This is a CODEOWNERS file. It defines who is responsible for different parts of the codebase.
+
+# These owners will be the default owners for everything in the repo.
+# Unless a later match takes precedence, they will be requested for review when someone opens a pull request.
+* @alebrije-admin
+
+# Frontend specific files
+/alebrije-website/alebrije-frontend/ @alebrije-frontend-team
+/alebrije-website/alebrije-frontend/src/ @alebrije-frontend-team
+/alebrije-website/alebrije-frontend/public/ @alebrije-frontend-team
+
+# Smart contract files
+/contracts/ @alebrije-contract-team
+/scripts/ @alebrije-contract-team
+
+# Documentation
+/docs/ @alebrije-docs-team
+*.md @alebrije-docs-team
+/alebrije-website/alebrije-frontend/public/whitepaper.html @alebrije-docs-team
+
+# Configuration files
+*.json @alebrije-admin
+*.yml @alebrije-admin
+*.yaml @alebrije-admin
+*.config.js @alebrije-admin
+*.config.ts @alebrije-admin
+
+# GitHub specific files
+.github/ @alebrije-admin
+.github/workflows/ @alebrije-admin
+.github/CODEOWNERS @alebrije-admin
+
+# Bot related files
+/bot/ @alebrije-bot-team
+/discord-bot/ @alebrije-bot-team
+/telegram-bot/ @alebrije-bot-team
+
+# Tests
+/__tests__/ @alebrije-test-team
+*.test.ts @alebrije-test-team
+*.test.tsx @alebrije-test-team
+jest.config.js @alebrije-test-team
+jest.setup.js @alebrije-test-team
+
+# Security sensitive files
+*.key @alebrije-admin
+*.pem @alebrije-admin
+*-keypair.json @alebrije-admin
+.env* @alebrije-admin 

@@ -1,0 +1,347 @@
+import React, { useMemo, useState, useEffect } from 'react';
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import { ConnectionProvider, WalletProvider, useWallet, useConnection } from '@solana/wallet-adapter-react';
+import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
+import { clusterApiUrl, PublicKey } from '@solana/web3.js';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '@solana/wallet-adapter-react-ui/styles.css';
+import BurnButtonComponent from './components/BurnButtonComponent';
+import TransferWithTaxComponent from './components/TransferWithTaxComponent';
+import SimpleTransferComponent from './components/SimpleTransferComponent';
+import TransferMintAuthorityComponent from './components/TransferMintAuthorityComponent';
+import CreateTokenComponent from './components/CreateTokenComponent';
+import BurnTokenComponent from './components/BurnTokenComponent';
+import SimpleTokenCreator from './components/SimpleTokenCreator';
+import MicroTokenCreator from './components/MicroTokenCreator';
+import BasicTokenCreator from './components/BasicTokenCreator';
+import SimpleBurnComponent from './components/SimpleBurnComponent';
+import SimplestBurnComponent from './components/SimplestBurnComponent';
+import WhitepaperButton from './components/WhitepaperButton';
+import WhitepaperFallback from './components/WhitepaperFallback';
+// import EmergencyBurnComponent from './components/EmergencyBurnComponent';
+
+// Logo image - make sure to add a logo.png file to your public folder
+const logoUrl = '/logo512.png';
+
+function AppContent() {
+  const { publicKey } = useWallet();
+  const { connection } = useConnection();
+  const [totalSupply, setTotalSupply] = useState<number | null>(null);
+  const [circulatingSupply, setCirculatingSupply] = useState<number | null>(null);
+  
+  // Fetch token supply info
+  useEffect(() => {
+    const fetchSupplyInfo = async () => {
+      try {
+        const mintAddress = new PublicKey("FSx3upaoPomkueMg7rftj8dy75GeifDL7qGbBSSC9KRt");
+        const mintInfo = await connection.getParsedAccountInfo(mintAddress);
+        
+        if (mintInfo.value) {
+          const data: any = mintInfo.value.data;
+          const supply = Number(data.parsed.info.supply);
+          const decimals = data.parsed.info.decimals;
+          const adjustedSupply = supply / Math.pow(10, decimals);
+          
+          setTotalSupply(1000000000); // Initial supply
+          setCirculatingSupply(adjustedSupply);
+        }
+      } catch (error) {
+        console.error("Error fetching supply info:", error);
+      }
+    };
+    
+    fetchSupplyInfo();
+  }, [connection]);
+  
+  return (
+    <div style={{ 
+      padding: '20px', 
+      maxWidth: '1200px', 
+      margin: '0 auto',
+      fontFamily: 'Arial, sans-serif',
+      color: '#333'
+    }}>
+      {/* Header */}
+      <header style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        marginBottom: '30px',
+        padding: '10px 0',
+        borderBottom: '1px solid #eaeaea'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img 
+            src={logoUrl} 
+            alt="Xolo Inu Logo" 
+            style={{ height: '50px', marginRight: '15px' }}
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.onerror = null;
+              target.src = 'https://via.placeholder.com/50x50?text=XOLO';
+            }}
+          />
+          <h1 style={{ margin: 0, fontSize: '24px' }}>Xolo Inu</h1>
+        </div>
+        <div>
+          <WalletMultiButton />
+        </div>
+      </header>
+      
+      {/* Hero Section */}
+      <div style={{ 
+        textAlign: 'center', 
+        marginBottom: '40px', 
+        padding: '40px 20px',
+        backgroundColor: '#f9f9f9',
+        borderRadius: '10px',
+        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+      }}>
+        <h1 style={{ fontSize: '36px', marginBottom: '20px' }}>🔥 $XOLO Token</h1>
+        <p style={{ fontSize: '18px', marginBottom: '20px', maxWidth: '800px', margin: '0 auto 20px auto' }}>
+          Welcome to Xolo-Inu - The meme coin inspired by the Xolo, launching Cinco de Mayo!
+        </p>
+        <p style={{ marginBottom: '30px', maxWidth: '800px', margin: '0 auto 30px auto' }}>
+          $XOLO is more than just a meme coin - it's a community-driven token with real utility.
+          Join our growing community and experience the power of the Xolo!
+        </p>
+        
+        {/* Action Buttons */}
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          gap: '15px', 
+          marginBottom: '30px',
+          flexWrap: 'wrap'
+        }}>
+          <a 
+            href="/whitepaper.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              padding: '12px 24px',
+              backgroundColor: '#4CAF50',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+              transition: 'background-color 0.3s'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#45a049'}
+            onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#4CAF50'}
+          >
+            📄 View Whitepaper
+          </a>
+          <a 
+            href="https://twitter.com/xoloinu" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              padding: '12px 24px',
+              backgroundColor: '#1DA1F2',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+              transition: 'background-color 0.3s'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1a91da'}
+            onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#1DA1F2'}
+          >
+            🕊️ Twitter
+          </a>
+          <a 
+            href="https://github.com/yourusername/xolo-project" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              padding: '12px 24px',
+              backgroundColor: '#333',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+              transition: 'background-color 0.3s'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#444'}
+            onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#333'}
+          >
+            💻 GitHub
+          </a>
+          <a 
+            href="https://t.me/xoloinu" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              padding: '12px 24px',
+              backgroundColor: '#0088cc',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+              transition: 'background-color 0.3s'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0077b3'}
+            onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#0088cc'}
+          >
+            📢 Telegram
+          </a>
+        </div>
+      </div>
+      
+      {/* Token Info Display */}
+      <div style={{ 
+        backgroundColor: '#f0f0f0', 
+        padding: '25px', 
+        borderRadius: '10px', 
+        marginBottom: '40px',
+        maxWidth: '800px',
+        margin: '0 auto 40px auto',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+      }}>
+        <h2 style={{ margin: '0 0 20px 0', textAlign: 'center' }}>$XOLO Token Info</h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', gap: '20px' }}>
+          <div style={{ flex: '1 1 200px', minWidth: '200px' }}>
+            <p style={{ margin: '10px 0', fontSize: '16px' }}><strong>Mint Address:</strong></p>
+            <p style={{ 
+              margin: '5px 0', 
+              padding: '10px', 
+              backgroundColor: 'white', 
+              borderRadius: '5px',
+              fontSize: '14px',
+              wordBreak: 'break-all'
+            }}>
+              FSx3upaoPomkueMg7rftj8dy75GeifDL7qGbBSSC9KRt
+            </p>
+          </div>
+          <div style={{ flex: '1 1 200px', display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
+            <div>
+              <p style={{ margin: '5px 0' }}><strong>Decimals:</strong> 9</p>
+              <p style={{ margin: '5px 0' }}><strong>Initial Supply:</strong> 1,000,000,000</p>
+              <p style={{ margin: '5px 0' }}><strong>Circulating Supply:</strong> {circulatingSupply !== null ? circulatingSupply.toLocaleString() : 'Loading...'}</p>
+              <p style={{ margin: '5px 0' }}><strong>Network:</strong> Solana Devnet</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Main Content - Token Tools */}
+      <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>$XOLO Token Tools</h2>
+      <div style={{ 
+        display: 'flex', 
+        flexWrap: 'wrap', 
+        gap: '30px', 
+        justifyContent: 'center',
+        marginBottom: '40px'
+      }}>
+        {/* Burn Component */}
+        <div style={{ 
+          flex: '1 1 500px', 
+          minWidth: '300px', 
+          maxWidth: '600px', 
+          backgroundColor: '#ffffff', 
+          borderRadius: '10px', 
+          padding: '25px',
+          boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+          border: '1px solid #eaeaea'
+        }}>
+          <SimplestBurnComponent />
+        </div>
+        
+        {/* Transfer Component */}
+        <div style={{ 
+          flex: '1 1 500px', 
+          minWidth: '300px', 
+          maxWidth: '600px', 
+          backgroundColor: '#ffffff', 
+          borderRadius: '10px', 
+          padding: '25px',
+          boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+          border: '1px solid #eaeaea'
+        }}>
+          <SimpleTransferComponent />
+        </div>
+      </div>
+      
+      {/* Footer */}
+      <footer style={{ 
+        textAlign: 'center', 
+        marginTop: '50px', 
+        padding: '20px 0',
+        borderTop: '1px solid #eaeaea',
+        color: '#666'
+      }}>
+        <p>© 2025 Xolo Inu. All rights reserved.</p>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          gap: '20px',
+          marginTop: '15px'
+        }}>
+          <a 
+            href="https://twitter.com/xoloinu" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: '#1DA1F2', textDecoration: 'none' }}
+          >
+            Twitter
+          </a>
+          <a 
+            href="https://github.com/yourusername/xolo-project" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: '#333', textDecoration: 'none' }}
+          >
+            GitHub
+          </a>
+          <a 
+            href="https://t.me/xoloinu" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: '#0088cc', textDecoration: 'none' }}
+          >
+            Telegram
+          </a>
+          <a 
+            href="/whitepaper.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: '#4CAF50', textDecoration: 'none' }}
+          >
+            Whitepaper
+          </a>
+        </div>
+      </footer>
+      
+      <ToastContainer position="bottom-right" />
+    </div>
+  );
+}
+
+function App() {
+  // Set up Solana network and wallet
+  const network = WalletAdapterNetwork.Devnet;
+  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  const wallets = useMemo(() => [
+    new PhantomWalletAdapter(),
+    new SolflareWalletAdapter()
+  ], []);
+
+  return (
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets} autoConnect>
+        <WalletModalProvider>
+          <AppContent />
+        </WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
+  );
+}
+
+export default App;

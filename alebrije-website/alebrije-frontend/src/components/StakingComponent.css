@@ -1,0 +1,144 @@
+.staking-reward-distribution {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #00ff00;
+  border-radius: 8px;
+}
+
+.distribution-diagram {
+  margin: 2rem 0;
+}
+
+.diagram-container {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #00ff00;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.diagram-title {
+  text-align: center;
+  color: #00ff00;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.diagram-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.flow-step {
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+}
+
+.step-title {
+  background: rgba(0, 255, 0, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.step-arrow {
+  color: #00ff00;
+  font-size: 1.5rem;
+}
+
+.distribution-split {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.split-item {
+  text-align: center;
+  flex: 1;
+  padding: 1rem;
+  background: rgba(0, 255, 0, 0.05);
+  border-radius: 4px;
+}
+
+.split-percentage {
+  font-size: 1.5rem;
+  color: #00ff00;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.split-label {
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.diagram-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.fee-info {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: rgba(0, 255, 0, 0.05);
+  border-radius: 4px;
+}
+
+.fee-info h4 {
+  color: #00ff00;
+  margin-bottom: 1rem;
+}
+
+.fee-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.fee-info li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.fee-info li:before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #00ff00;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .distribution-split {
+    flex-direction: column;
+  }
+  
+  .split-item {
+    margin-bottom: 1rem;
+  }
+  
+  .diagram-legend {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+} 

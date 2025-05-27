@@ -1,0 +1,23 @@
+{
+  "name": "albj-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for ALBJ Token community",
+  "main": "dist/bot.js",
+  "scripts": {
+    "start": "ts-node src/bot.ts",
+    "build": "tsc",
+    "dev": "nodemon src/bot.ts"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5",
+    "twitter-api-v2": "^1.23.2",
+    "typescript": "^5.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.47",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2"
+  }
+}

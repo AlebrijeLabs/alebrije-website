@@ -1,0 +1,256 @@
+:root {
+  --primary-color: #FF5733;
+  --secondary-color: #33FF57;
+  --accent-color: #3357FF;
+  --dark-color: #1A1A1A;
+  --light-color: #F8F9FA;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--dark-color);
+  line-height: 1.6;
+}
+
+/* Header & Navigation */
+.header {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: white;
+}
+
+.navbar {
+  padding: 1rem 0;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero {
+  padding: 6rem 0;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.launch-countdown {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Sections */
+.section {
+  padding: 5rem 0;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  position: relative;
+}
+
+.section-title:after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--primary-color);
+  margin: 1rem auto;
+}
+
+/* Tokenomics */
+.tokenomics-chart {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.tokenomics-list, .tax-list {
+  list-style: none;
+  padding: 0;
+}
+
+.tokenomics-list li, .tax-list li {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.tokenomics-list .badge, .tax-list .badge {
+  margin-right: 10px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.token-info {
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+
+.token-info-item {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.token-info-label {
+  font-weight: 600;
+  width: 120px;
+}
+
+/* Roadmap */
+.roadmap {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.roadmap:before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  background: var(--primary-color);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -1px;
+}
+
+.roadmap-item {
+  padding: 10px 40px;
+  position: relative;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.roadmap-item:nth-child(odd) {
+  left: 0;
+}
+
+.roadmap-item:nth-child(even) {
+  left: 50%;
+}
+
+.roadmap-content {
+  padding: 20px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.roadmap-content h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+/* Community */
+.community-item {
+  padding: 2rem;
+  transition: transform 0.3s;
+}
+
+.community-item:hover {
+  transform: translateY(-10px);
+}
+
+.community-item i {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+.footer {
+  background: var(--dark-color);
+  color: white;
+  padding: 4rem 0 2rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: #ddd;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.footer-bottom {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #444;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .roadmap:before {
+    left: 40px;
+  }
+  
+  .roadmap-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 0;
+  }
+  
+  .roadmap-item:nth-child(even) {
+    left: 0;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-buttons .btn {
+    width: 80%;
+  }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.section {
+  animation: fadeIn 1s ease-in-out;
+} 

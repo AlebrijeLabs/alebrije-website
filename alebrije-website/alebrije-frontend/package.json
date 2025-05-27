@@ -1,0 +1,51 @@
+{
+  "name": "alebrije-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
+    "@mui/material": "^7.1.0",
+    "@solana/spl-token": "^0.1.8",
+    "@solana/wallet-adapter-base": "0.9.22",
+    "@solana/wallet-adapter-react": "0.15.33",
+    "@solana/wallet-adapter-react-ui": "0.9.33",
+    "@solana/wallet-adapter-wallets": "0.19.23",
+    "@solana/web3.js": "^1.98.2",
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
+    "chart.js": "4.4.1",
+    "process": "^0.11.10",
+    "react": "18.2.0",
+    "react-chartjs-2": "5.2.0",
+    "react-dom": "18.2.0",
+    "react-toastify": "^10.0.4",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "stream-browserify": "^3.0.0",
+    "util": "^0.12.5",
+    "vite-plugin-html": "^3.2.2",
+    "web-vitals": "^5.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.27.1",
+    "@types/react": "18.2.55",
+    "@types/react-dom": "18.2.19",
+    "@typescript-eslint/eslint-plugin": "6.21.0",
+    "@typescript-eslint/parser": "6.21.0",
+    "@vitejs/plugin-react": "4.2.1",
+    "eslint": "8.56.0",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-react-refresh": "0.4.5",
+    "typescript": "5.2.2",
+    "vite": "^6.3.5",
+    "vite-plugin-node-polyfills": "^0.23.0"
+  }
+}
