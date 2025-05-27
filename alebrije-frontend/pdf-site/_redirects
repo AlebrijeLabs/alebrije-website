@@ -1,8 +1,0 @@
-# Ensure the whitepaper.pdf is served correctly
-/whitepaper.pdf /whitepaper.pdf 200! Content-Type=application/pdf
-
-# Fallback to HTML version if PDF fails
-/whitepaper /whitepaper.html 200
-
-# Direct access to HTML version
-/whitepaper.html /whitepaper.html 200 

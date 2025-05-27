@@ -1,12 +1,7 @@
 {
     "folders": [
         {
-            "name": "xolo_coin",
-            "path": "xolo_coin"
-        },
-        {
-            "name": "xolo-frontend",
-            "path": "xolo-frontend"
+            "path": "."
         }
     ]
 }

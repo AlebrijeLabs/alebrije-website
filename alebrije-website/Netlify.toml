@@ -1,3 +1,19 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
+  command = "cd alebrije-frontend && npm install && npm run build"
+  publish = "alebrije-frontend/dist"
+  base = "alebrije-website"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[dev]
+  command = "cd alebrije-frontend && npm run dev"
+  port = 3000
+  targetPort = 3000
+  publish = "alebrije-frontend/dist"
+  autoLaunch = true 
