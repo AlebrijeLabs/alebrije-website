@@ -8,16 +8,23 @@ export default defineConfig({
     target: 'esnext',
     sourcemap: true,
     rollupOptions: {
+      external: [
+        '@solana/wallet-adapter-wallets',
+        '@solana/wallet-adapter-react',
+        '@solana/wallet-adapter-react-ui',
+        '@solana/wallet-adapter-base',
+        '@solana/web3.js',
+        '@solana/spl-token'
+      ],
       output: {
         format: 'es',
-        manualChunks: {
-          'solana': [
-            '@solana/wallet-adapter-wallets',
-            '@solana/wallet-adapter-react',
-            '@solana/wallet-adapter-react-ui',
-            '@solana/wallet-adapter-base',
-            '@solana/web3.js'
-          ]
+        globals: {
+          '@solana/wallet-adapter-wallets': 'SolanaWalletAdapterWallets',
+          '@solana/wallet-adapter-react': 'SolanaWalletAdapterReact',
+          '@solana/wallet-adapter-react-ui': 'SolanaWalletAdapterReactUi',
+          '@solana/wallet-adapter-base': 'SolanaWalletAdapterBase',
+          '@solana/web3.js': 'SolanaWeb3',
+          '@solana/spl-token': 'SolanaSplToken'
         }
       }
     }
@@ -28,25 +35,6 @@ export default defineConfig({
       stream: "stream-browserify",
       zlib: "browserify-zlib",
       util: 'util'
-    },
-    dedupe: [
-      '@solana/wallet-adapter-wallets',
-      '@solana/wallet-adapter-react',
-      '@solana/wallet-adapter-react-ui',
-      '@solana/wallet-adapter-base',
-      '@solana/web3.js'
-    ]
-  },
-  optimizeDeps: {
-    esbuildOptions: {
-      target: 'esnext'
-    },
-    include: [
-      '@solana/wallet-adapter-wallets',
-      '@solana/wallet-adapter-react',
-      '@solana/wallet-adapter-react-ui',
-      '@solana/wallet-adapter-base',
-      '@solana/web3.js'
-    ]
+    }
   }
 }) 
