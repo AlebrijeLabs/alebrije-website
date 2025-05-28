@@ -1,28 +1,25 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
-import commonjs from '@rollup/plugin-commonjs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    nodeResolve({
-      browser: true,
-      preferBuiltins: false,
-      mainFields: ['browser', 'module', 'main']
-    }),
-    commonjs({
-      include: /node_modules/,
-      transformMixedEsModules: true
-    })
-  ],
+  plugins: [react()],
   build: {
     target: 'esnext',
     sourcemap: true,
-    commonjsOptions: {
-      include: [/node_modules/],
-      transformMixedEsModules: true
+    rollupOptions: {
+      output: {
+        format: 'es',
+        manualChunks: {
+          'solana': [
+            '@solana/wallet-adapter-wallets',
+            '@solana/wallet-adapter-react',
+            '@solana/wallet-adapter-react-ui',
+            '@solana/wallet-adapter-base',
+            '@solana/web3.js'
+          ]
+        }
+      }
     }
   },
   resolve: {
@@ -31,7 +28,14 @@ export default defineConfig({
       stream: "stream-browserify",
       zlib: "browserify-zlib",
       util: 'util'
-    }
+    },
+    dedupe: [
+      '@solana/wallet-adapter-wallets',
+      '@solana/wallet-adapter-react',
+      '@solana/wallet-adapter-react-ui',
+      '@solana/wallet-adapter-base',
+      '@solana/web3.js'
+    ]
   },
   optimizeDeps: {
     esbuildOptions: {
