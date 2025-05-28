@@ -10,6 +10,9 @@ export default defineConfig({
     commonjsOptions: {
       include: [/node_modules/],
       transformMixedEsModules: true
+    },
+    rollupOptions: {
+      external: ['@solana/wallet-adapter-wallets']
     }
   },
   resolve: {
