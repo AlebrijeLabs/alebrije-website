@@ -1,5 +1,10 @@
 [build]
-  publish = "public"
+  base = "alebrije-website/alebrije-frontend"
+  command = "npm install && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "18"
 
 [[redirects]]
   from = "/*"
