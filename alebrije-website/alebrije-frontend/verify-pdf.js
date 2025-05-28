@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-const PDF_PATH = path.join('public', 'whitepaper.pdf');
-const DIST_PATH = path.join('dist', 'whitepaper.pdf');
+const PDF_PATH = path.join(process.cwd(), 'public', 'whitepaper.pdf');
+const DIST_PATH = path.join(process.cwd(), 'dist', 'whitepaper.pdf');
 
 console.log('🔍 Verifying whitepaper.pdf...');
 
