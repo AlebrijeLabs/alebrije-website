@@ -17,11 +17,23 @@ export default defineConfig({
     target: 'esnext',
     sourcemap: true,
     rollupOptions: {
+      external: [
+        '@solana/wallet-adapter-wallets',
+        '@solana/wallet-adapter-react',
+        '@solana/wallet-adapter-react-ui',
+        '@solana/wallet-adapter-base',
+        '@solana/web3.js',
+        '@solana/spl-token'
+      ],
       output: {
         format: 'es',
-        generatedCode: {
-          preset: 'es2015',
-          arrowFunctions: true
+        globals: {
+          '@solana/wallet-adapter-wallets': 'SolanaWalletAdapterWallets',
+          '@solana/wallet-adapter-react': 'SolanaWalletAdapterReact',
+          '@solana/wallet-adapter-react-ui': 'SolanaWalletAdapterReactUi',
+          '@solana/wallet-adapter-base': 'SolanaWalletAdapterBase',
+          '@solana/web3.js': 'SolanaWeb3',
+          '@solana/spl-token': 'SolanaSplToken'
         }
       }
     }

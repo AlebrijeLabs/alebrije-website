@@ -20,21 +20,15 @@
     "@solana/wallet-adapter-wallets": "^0.19.14",
     "@solana/web3.js": "^1.98.0",
     "axios": "^1.8.4",
-    "browserify-zlib": "^0.2.0",
-    "process": "^0.11.10",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "stream-browserify": "^3.0.0",
-    "util": "^0.12.5"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react": "^4.2.0",
     "typescript": "^5.0.2",
-    "vite": "^5.0.0",
-    "@rollup/plugin-commonjs": "^25.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.0"
+    "vite": "^5.0.0"
   },
   "resolutions": {
     "@solana/web3.js": "^1.98.0",
