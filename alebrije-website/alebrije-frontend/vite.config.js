@@ -12,7 +12,18 @@ export default defineConfig({
       transformMixedEsModules: true
     },
     rollupOptions: {
-      external: ['@solana/wallet-adapter-wallets']
+      external: [
+        '@solana/wallet-adapter-wallets',
+        '@solana/addresses',
+        '@solana/codecs',
+        '@solana/errors',
+        '@solana/functional',
+        '@solana/instructions',
+        '@solana/codecs-core',
+        '@solana/codecs-strings',
+        '@solana/rpc-spec',
+        '@solana/assertions'
+      ]
     }
   },
   resolve: {
