@@ -10,13 +10,17 @@ export default defineConfig({
       transformMixedEsModules: true
     },
     rollupOptions: {
-      external: [
-        '@solana/wallet-adapter-wallets',
-        '@solana/wallet-adapter-react',
-        '@solana/wallet-adapter-react-ui',
-        '@solana/wallet-adapter-base',
-        '@solana/web3.js'
-      ]
+      output: {
+        manualChunks: {
+          'solana': [
+            '@solana/wallet-adapter-wallets',
+            '@solana/wallet-adapter-react',
+            '@solana/wallet-adapter-react-ui',
+            '@solana/wallet-adapter-base',
+            '@solana/web3.js'
+          ]
+        }
+      }
     }
   },
   resolve: {
