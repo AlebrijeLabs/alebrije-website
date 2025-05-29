@@ -22,7 +22,8 @@ export default defineConfig({
         '@solana/codecs-core',
         '@solana/codecs-strings',
         '@solana/rpc-spec',
-        '@solana/assertions'
+        '@solana/assertions',
+        '/src/main.tsx'
       ]
     }
   },
