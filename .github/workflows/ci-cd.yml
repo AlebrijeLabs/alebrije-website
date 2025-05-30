@@ -5,6 +5,16 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - preview
+          - production
 
 env:
   NODE_VERSION: '20.18.0'
@@ -65,11 +75,14 @@ jobs:
           name: build
           path: alebrije-website/alebrije-frontend/dist
 
-  deploy-preview:
-    name: Deploy Preview
+  deploy:
+    name: Deploy
     needs: build
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: alebrije-website/alebrije-frontend
 
     steps:
       - uses: actions/checkout@v4
@@ -78,37 +91,20 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build
-          path: alebrije-website/alebrije-frontend/dist
+          path: dist
 
       - name: Install Netlify CLI
         run: npm install -g netlify-cli
 
       - name: Deploy to Netlify
-        run: netlify deploy --dir=alebrije-website/alebrije-frontend/dist --alias=${{ github.head_ref }}
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-
-  deploy-production:
-    name: Deploy Production
-    needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: alebrije-website/alebrije-frontend/dist
-
-      - name: Install Netlify CLI
-        run: npm install -g netlify-cli
-
-      - name: Deploy to Netlify
-        run: netlify deploy --dir=alebrije-website/alebrije-frontend/dist --prod
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            netlify deploy --dir=dist --alias=${{ github.head_ref }}
+          elif [ "${{ github.event_name }}" == "workflow_dispatch" ] && [ "${{ github.event.inputs.environment }}" == "preview" ]; then
+            netlify deploy --dir=dist --alias=manual-preview
+          else
+            netlify deploy --dir=dist --prod
+          fi
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }} 
