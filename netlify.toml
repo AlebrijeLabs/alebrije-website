@@ -7,9 +7,19 @@
   NODE_VERSION = "20.18.0"
   NPM_FLAGS = "--legacy-peer-deps"
 
-# Cache dependencies
-[[plugins]]
-  package = "@netlify/plugin-cache-core"
+# Cache configuration
+[build.processing]
+  skip_processing = false
+[build.processing.css]
+  bundle = true
+  minify = true
+[build.processing.js]
+  bundle = true
+  minify = true
+[build.processing.html]
+  pretty_urls = true
+[build.processing.images]
+  compress = true
 
 # Handle SPA routing
 [[redirects]]
