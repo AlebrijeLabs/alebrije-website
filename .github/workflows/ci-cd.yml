@@ -20,8 +20,25 @@ env:
   NODE_VERSION: '20.18.0'
 
 jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Netlify credentials
+        run: |
+          if [ -z "${{ secrets.NETLIFY_AUTH_TOKEN }}" ]; then
+            echo "::error::NETLIFY_AUTH_TOKEN is not set. Please add it to your repository secrets."
+            exit 1
+          fi
+          if [ -z "${{ secrets.NETLIFY_SITE_ID }}" ]; then
+            echo "::error::NETLIFY_SITE_ID is not set. Please add it to your repository secrets."
+            exit 1
+          fi
+          echo "✅ Netlify credentials validated"
+
   test:
     name: Test
+    needs: validate
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -75,7 +92,7 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: build
+    needs: [validate, build]
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     defaults:
@@ -94,21 +111,7 @@ jobs:
       - name: Install Netlify CLI
         run: npm install -g netlify-cli
 
-      - name: Validate Netlify credentials
-        id: validate
-        run: |
-          if [ -z "${{ secrets.NETLIFY_AUTH_TOKEN }}" ]; then
-            echo "::error::NETLIFY_AUTH_TOKEN is not set. Please add it to your repository secrets."
-            exit 1
-          fi
-          if [ -z "${{ secrets.NETLIFY_SITE_ID }}" ]; then
-            echo "::error::NETLIFY_SITE_ID is not set. Please add it to your repository secrets."
-            exit 1
-          fi
-          echo "✅ Netlify credentials validated"
-
       - name: Deploy to Netlify
-        if: steps.validate.outcome == 'success'
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
             netlify deploy --dir=dist --alias=${{ github.head_ref }}
