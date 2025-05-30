@@ -16,6 +16,10 @@ on:
           - preview
           - production
 
+permissions:
+  contents: read
+  id-token: write
+
 env:
   NODE_VERSION: '20.18.0'
 
@@ -23,15 +27,16 @@ jobs:
   validate:
     name: Validate
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: Check Netlify credentials
         run: |
-          if [ -z "${{ secrets.NETLIFY_AUTH_TOKEN }}" ]; then
-            echo "::error::NETLIFY_AUTH_TOKEN is not set. Please add it to your repository secrets."
+          if [ -z "${{ vars.NETLIFY_AUTH_TOKEN }}" ]; then
+            echo "::error::NETLIFY_AUTH_TOKEN is not set. Please add it to your repository variables."
             exit 1
           fi
-          if [ -z "${{ secrets.NETLIFY_SITE_ID }}" ]; then
-            echo "::error::NETLIFY_SITE_ID is not set. Please add it to your repository secrets."
+          if [ -z "${{ vars.NETLIFY_SITE_ID }}" ]; then
+            echo "::error::NETLIFY_SITE_ID is not set. Please add it to your repository variables."
             exit 1
           fi
           echo "✅ Netlify credentials validated"
@@ -95,6 +100,7 @@ jobs:
     needs: [validate, build]
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    environment: production
     defaults:
       run:
         working-directory: alebrije-website/alebrije-frontend
@@ -121,5 +127,5 @@ jobs:
             netlify deploy --dir=dist --prod
           fi
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }} 
+          NETLIFY_AUTH_TOKEN: ${{ vars.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }} 
