@@ -1,12 +1,28 @@
 [build]
   base = "alebrije-website/alebrije-frontend"
-  command = "npm install && npm run build"
-  publish = "dist"
+  command = "npm ci && npm run build"
+  publish = "alebrije-website/alebrije-frontend/dist"
 
 [build.environment]
   NODE_VERSION = "20.18.0"
+  NPM_FLAGS = "--legacy-peer-deps"
 
+# Cache dependencies
+[[plugins]]
+  package = "@netlify/plugin-cache-core"
+
+# Handle SPA routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 200 
+  status = 200
+
+# Add security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:; img-src 'self' data: https:; font-src 'self' data: https:;" 
