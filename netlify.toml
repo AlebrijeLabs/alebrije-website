@@ -1,7 +1,7 @@
 [build]
   base = "alebrije-website/alebrije-frontend"
-  command = "npm ci && npm run build"
-  publish = "alebrije-website/alebrije-frontend/dist"
+  command = "npm ci && cp public/whitepaper.pdf dist/ && npm run build"
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20.18.0"

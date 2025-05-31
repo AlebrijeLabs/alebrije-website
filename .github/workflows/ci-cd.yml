@@ -22,6 +22,7 @@ permissions:
 
 env:
   NODE_VERSION: '20.18.0'
+  FRONTEND_DIR: alebrije-website/alebrije-frontend
 
 jobs:
   validate:
@@ -31,12 +32,12 @@ jobs:
     steps:
       - name: Check Netlify credentials
         run: |
-          if [ -z "${{ vars.NETLIFY_AUTH_TOKEN }}" ]; then
-            echo "::error::NETLIFY_AUTH_TOKEN is not set. Please add it to your repository variables."
+          if [ -z "${{ secrets.NETLIFY_AUTH_TOKEN }}" ]; then
+            echo "::error::NETLIFY_AUTH_TOKEN is not set. Please add it to your repository secrets."
             exit 1
           fi
-          if [ -z "${{ vars.NETLIFY_SITE_ID }}" ]; then
-            echo "::error::NETLIFY_SITE_ID is not set. Please add it to your repository variables."
+          if [ -z "${{ secrets.NETLIFY_SITE_ID }}" ]; then
+            echo "::error::NETLIFY_SITE_ID is not set. Please add it to your repository secrets."
             exit 1
           fi
           echo "✅ Netlify credentials validated"
@@ -47,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: alebrije-website/alebrije-frontend
+        working-directory: ${{ env.FRONTEND_DIR }}
 
     steps:
       - uses: actions/checkout@v4
@@ -57,7 +58,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          cache-dependency-path: alebrije-website/alebrije-frontend/package-lock.json
+          cache-dependency-path: ${{ env.FRONTEND_DIR }}/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -71,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: alebrije-website/alebrije-frontend
+        working-directory: ${{ env.FRONTEND_DIR }}
 
     steps:
       - uses: actions/checkout@v4
@@ -81,7 +82,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          cache-dependency-path: alebrije-website/alebrije-frontend/package-lock.json
+          cache-dependency-path: ${{ env.FRONTEND_DIR }}/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -93,7 +94,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build
-          path: alebrije-website/alebrije-frontend/dist
+          path: ${{ env.FRONTEND_DIR }}/dist
 
   deploy:
     name: Deploy
@@ -103,7 +104,7 @@ jobs:
     environment: production
     defaults:
       run:
-        working-directory: alebrije-website/alebrije-frontend
+        working-directory: ${{ env.FRONTEND_DIR }}
 
     steps:
       - uses: actions/checkout@v4
@@ -112,10 +113,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build
-          path: dist
+          path: ${{ env.FRONTEND_DIR }}/dist
 
       - name: Install Netlify CLI
-        run: npm install -g netlify-cli
+        run: npm install -g netlify-cli@latest
 
       - name: Deploy to Netlify
         run: |
@@ -127,5 +128,5 @@ jobs:
             netlify deploy --dir=dist --prod
           fi
         env:
-          NETLIFY_AUTH_TOKEN: ${{ vars.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }} 
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }} 
