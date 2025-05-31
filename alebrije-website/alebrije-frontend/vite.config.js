@@ -11,20 +11,6 @@ export default defineConfig({
     commonjsOptions: {
       include: [/node_modules/],
       transformMixedEsModules: true
-    },
-    rollupOptions: {
-      external: [
-        '@solana/wallet-adapter-wallets',
-        '@solana/addresses',
-        '@solana/codecs',
-        '@solana/errors',
-        '@solana/functional',
-        '@solana/instructions',
-        '@solana/codecs-core',
-        '@solana/codecs-strings',
-        '@solana/rpc-spec',
-        '@solana/assertions'
-      ]
     }
   },
   resolve: {
@@ -32,14 +18,21 @@ export default defineConfig({
       process: "process/browser",
       stream: "stream-browserify",
       zlib: "browserify-zlib",
-      util: 'util'
+      util: 'util',
+      buffer: 'buffer'
     }
+  },
+  define: {
+    global: 'globalThis',
+    'process.env': {}
   },
   optimizeDeps: {
     esbuildOptions: {
       target: 'esnext'
     },
     include: [
+      'process',
+      'buffer',
       '@solana/wallet-adapter-wallets',
       '@solana/wallet-adapter-react',
       '@solana/wallet-adapter-react-ui',
