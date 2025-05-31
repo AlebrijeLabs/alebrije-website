@@ -11,11 +11,16 @@ export default defineConfig({
     commonjsOptions: {
       include: [/node_modules/],
       transformMixedEsModules: true
+    },
+    rollupOptions: {
+      external: [
+        'process/browser',
+        'process/browser/'
+      ]
     }
   },
   resolve: {
     alias: {
-      process: "process/browser",
       stream: "stream-browserify",
       zlib: "browserify-zlib",
       util: 'util',
@@ -24,14 +29,14 @@ export default defineConfig({
   },
   define: {
     global: 'globalThis',
-    'process.env': {}
+    'process.env': {},
+    'process.browser': true
   },
   optimizeDeps: {
     esbuildOptions: {
       target: 'esnext'
     },
     include: [
-      'process',
       'buffer',
       '@solana/wallet-adapter-wallets',
       '@solana/wallet-adapter-react',
