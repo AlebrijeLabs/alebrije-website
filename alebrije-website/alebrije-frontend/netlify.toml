@@ -1,6 +1,5 @@
 [build]
-  base = "alebrije-website"
-  command = "npm install --legacy-peer-deps && npm run build && cp alebrije-frontend/public/whitepaper.pdf dist/"
+  command = "npm install --legacy-peer-deps && npm run build && cp public/whitepaper.pdf dist/"
   publish = "dist"
 
 [build.environment]
