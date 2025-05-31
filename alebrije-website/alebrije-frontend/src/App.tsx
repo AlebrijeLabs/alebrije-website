@@ -1,11 +1,10 @@
-import React from 'react'
+// src/App.tsx
+import HomePage from "./pages/HomePage";
+import "./pages/HomePage.css"; // ✅ uses same styling
 
-function App() {
-  return (
-    <div>
-      <h1>Alebrije</h1>
-    </div>
-  )
-}
+const App = () => {
+  return <HomePage />;
+};
 
-export default App 
+export default App;
+// src/pages/HomePage.tsx
