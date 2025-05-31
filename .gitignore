@@ -37,3 +37,5 @@ secure-keys/
 **/*-keypair.json
 temp_assets/
 whitepaper-deploy.zip 
+# Local Netlify folder
+.netlify

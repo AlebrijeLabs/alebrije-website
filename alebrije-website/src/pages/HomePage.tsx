@@ -7,20 +7,19 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 const HomePage: React.FC = () => {
     return (
         <div className="home-container">
-            <img src="/logo.png" alt="XoloCoin Logo" className="logo" />
+            <img src="/logo.png" alt="Alebrije Logo" className="logo" />
             <WalletMultiButton />
             <h1 style={{ fontSize: "2.5rem", color: "#ff6600", marginBottom: "0.5rem" }}>
-                Welcome to Xolo-Inu 
+                Welcome to Alebrije Token
             </h1>
 
             <p>
-                The meme coin inspired by the Xolo — launching{" "}
-                <strong>Cinco de Mayo</strong>
+                A vibrant Mexican folk art-inspired meme coin on Solana
             </p>
 
             <div className="button-group">
                 <button className="burn-btn">🔥 Burn Tokens</button>
-                <button className="transfer-btn">🚀 Transfer with Tax</button>
+                <button className="transfer-btn">🚀 Transfer Tokens</button>
                 <a
                     href="/whitepaper.pdf"
                     target="_blank"
@@ -32,9 +31,9 @@ const HomePage: React.FC = () => {
             </div>
 
             <div className="social-links">
-                <a href="https://x.com/XoloCoin" target="_blank" rel="noopener noreferrer">🕊️ X</a>
-                <a href="https://github.com/Xolo09/alebrije-frontend" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
-                <a href="https://t.me/XoloCoin" target="_blank" rel="noopener noreferrer">📢 Telegram</a>
+                <a href="https://x.com/Alebrije" target="_blank" rel="noopener noreferrer">🕊️ X</a>
+                <a href="https://github.com/alebrije-project" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
+                <a href="https://t.me/Alebrije" target="_blank" rel="noopener noreferrer">📢 Telegram</a>
             </div>
 
         </div>
