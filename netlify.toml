@@ -1,6 +1,6 @@
 [build]
   base = "alebrije-website/alebrije-frontend"
-  command = "npm ci && cp public/whitepaper.pdf dist/ && npm run build"
+  command = "npm ci && npm run build && cp public/whitepaper.pdf dist/"
   publish = "dist"
 
 [build.environment]
