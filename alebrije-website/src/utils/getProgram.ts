@@ -1,7 +1,7 @@
 import { Connection, PublicKey } from "@solana/web3.js";
 import { AnchorProvider, Program, Idl } from "@coral-xyz/anchor";
 import { WalletContextState } from "@solana/wallet-adapter-react";
-import idlJson from "../idl/XoloCoin.json";
+import idlJson from "../idl/Alebrije.json";
 
 const idl = idlJson as unknown as Idl;
 const PROGRAM_ID = new PublicKey("93CCq4xaFrrEmoD8DtwD8rjuizZddBrnZYv3p7oQSSTz");
