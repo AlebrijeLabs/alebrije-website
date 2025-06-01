@@ -1,0 +1,350 @@
+/* Dynamic Wallet Button Styles - Navigation Consistent */
+.dynamic-wallet-button {
+  position: relative;
+}
+
+/* Not Connected Button - Match Navigation Links Style */
+.dynamic-wallet-button .wallet-adapter-button {
+  background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+  border: 1px solid #00ff41;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.dynamic-wallet-button .wallet-adapter-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.dynamic-wallet-button .wallet-adapter-button:hover {
+  color: #00ff41;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+  transform: translateY(-2px);
+}
+
+.dynamic-wallet-button .wallet-adapter-button:hover::before {
+  left: 100%;
+}
+
+.connect-wallet-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wallet-icon-default {
+  font-size: 1rem;
+}
+
+/* Connected Wallet Container */
+.dynamic-wallet-connected {
+  position: relative;
+}
+
+/* Connected Wallet Button - Match Navigation Style */
+.wallet-button-connected {
+  background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+  border: 1px solid #00ff41;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  min-width: 180px;
+}
+
+.wallet-button-connected::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.wallet-button-connected:hover {
+  color: #00ff41;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+  transform: translateY(-2px);
+}
+
+.wallet-button-connected:hover::before {
+  left: 100%;
+}
+
+.wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.wallet-icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: rgba(0, 255, 65, 0.1);
+  border-radius: 6px;
+  backdrop-filter: blur(5px);
+}
+
+.wallet-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.wallet-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wallet-address {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Courier New', monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-chevron {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  transition: transform 0.3s ease;
+  margin-left: auto;
+}
+
+.dropdown-chevron.open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.wallet-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(15px);
+  border: 1px solid #00ff41;
+  border-radius: 12px;
+  min-width: 280px;
+  box-shadow: 0 8px 32px rgba(0, 255, 65, 0.2);
+  z-index: 10000;
+  animation: dropdownSlideIn 0.3s ease;
+  overflow: hidden;
+}
+
+@keyframes dropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-header {
+  padding: 1rem;
+  background: rgba(0, 255, 65, 0.05);
+}
+
+.dropdown-wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dropdown-icon {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(0, 255, 65, 0.15);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+}
+
+.dropdown-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.dropdown-wallet-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.dropdown-address {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Courier New', monospace;
+  word-break: break-all;
+  line-height: 1.3;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.3), transparent);
+  margin: 0 1rem;
+}
+
+.dropdown-actions {
+  padding: 0.5rem;
+}
+
+.dropdown-action {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.dropdown-action:hover {
+  background: rgba(0, 255, 65, 0.1);
+  color: #00ff41;
+  transform: translateX(4px);
+}
+
+.dropdown-action svg {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.disconnect-action:hover {
+  background: rgba(255, 107, 53, 0.1);
+  color: #ff6b35;
+}
+
+/* Connecting state */
+.dynamic-wallet-connecting {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+  border: 1px solid #00ff41;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.connecting-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(0, 255, 65, 0.3);
+  border-top: 2px solid #00ff41;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Copy notification for wallet */
+.copy-notification-wallet {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: rgba(0, 255, 65, 0.9);
+  color: #000000;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 255, 65, 0.3);
+  animation: fadeInOut 2s ease-in-out;
+  z-index: 10001;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; transform: translateY(10px); }
+  10%, 90% { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .wallet-details {
+    display: none;
+  }
+  
+  .wallet-info {
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  
+  .wallet-button-connected {
+    min-width: auto;
+    padding: 0.5rem;
+  }
+  
+  .connect-wallet-content span {
+    display: none;
+  }
+
+  .wallet-dropdown {
+    min-width: 250px;
+    right: -50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wallet-dropdown {
+    min-width: 220px;
+    right: -80px;
+  }
+  
+  .dropdown-address {
+    font-size: 0.7rem;
+  }
+} 
