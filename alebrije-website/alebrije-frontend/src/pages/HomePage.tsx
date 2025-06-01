@@ -3,10 +3,11 @@ import React, { useState, useEffect } from "react";
 import "./HomePage.css"; // ✅ Make sure this is included
 import { useWallet } from "@solana/wallet-adapter-react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTwitter, faGithub, faTelegram, faDiscord } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faTelegram, faDiscord } from '@fortawesome/free-brands-svg-icons';
 import { faCopy, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { TestBurnModal, TestTransferModal, TestHistoryModal } from '../components/TestModeModals';
 import DynamicWalletButton from '../components/DynamicWalletButton';
+import XIcon from '../components/icons/XIcon';
 
 const HomePage: React.FC = () => {
     const { connected, publicKey, disconnect } = useWallet();
@@ -740,7 +741,7 @@ const HomePage: React.FC = () => {
 
             <div className="social-links">
                 <a href="https://x.com/ALBJToken" target="_blank" rel="noopener noreferrer" className="social-link twitter">
-                    <FontAwesomeIcon icon={faTwitter} />
+                    <XIcon />
                     <span>X</span>
                 </a>
                 <a href="https://github.com/AlebrijeLabs" target="_blank" rel="noopener noreferrer" className="social-link github">
@@ -783,7 +784,7 @@ const HomePage: React.FC = () => {
                         <p>Global folk art-inspired meme coin bridging ancient wisdom with DeFi innovation.</p>
                         <div className="footer-social">
                             <a href="https://x.com/ALBJToken" target="_blank" rel="noopener noreferrer">
-                                <FontAwesomeIcon icon={faTwitter} />
+                                <XIcon />
                             </a>
                             <a href="https://t.me/ALBJTokenBot" target="_blank" rel="noopener noreferrer">
                                 <FontAwesomeIcon icon={faTelegram} />

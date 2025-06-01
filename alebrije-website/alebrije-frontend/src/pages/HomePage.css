@@ -610,20 +610,20 @@ button,
     letter-spacing: 0.5px;
 }
 
-/* X (Twitter) Link */
+/* X (formerly Twitter) Link */
 .social-link.twitter {
-    color: #1da1f2;
-    border: 2px solid rgba(29, 161, 242, 0.4);
-    background: rgba(29, 161, 242, 0.15);
-    box-shadow: 0 4px 15px rgba(29, 161, 242, 0.2);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
 }
 
 .social-link.twitter:hover {
-    color: #ffffff;
-    background: linear-gradient(135deg, #1da1f2, #0d8bd9);
-    box-shadow: 0 6px 20px rgba(29, 161, 242, 0.4);
+    color: #000000;
+    background: linear-gradient(135deg, #ffffff, #e0e0e0);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
     transform: translateY(-3px) scale(1.05);
-    border-color: #1da1f2;
+    border-color: #ffffff;
 }
 
 .social-link.twitter:hover svg {
