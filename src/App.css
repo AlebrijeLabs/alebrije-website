@@ -1,0 +1,61 @@
+.App {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom, #101010, #1a1a1a);
+  color: white;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.hero {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 2px solid #444;
+  border-radius: 20px;
+  background-color: #222;
+  box-shadow: 0 0 20px #000;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #ccc;
+}
+
+.buttons button {
+  margin: 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.burn-button {
+  background-color: #ff4c4c;
+  color: white;
+}
+
+.transfer-button {
+  background-color: #00b894;
+  color: white;
+}
+
+.links {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.links a {
+  color: #87cefa;
+  text-decoration: none;
+  font-weight: bold;
+}
