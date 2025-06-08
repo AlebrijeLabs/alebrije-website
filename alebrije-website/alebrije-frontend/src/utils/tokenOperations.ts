@@ -1,16 +1,50 @@
 import { Connection, PublicKey, Transaction, clusterApiUrl } from '@solana/web3.js';
 import { 
   TOKEN_PROGRAM_ID, 
-  createBurnInstruction, 
-  getAssociatedTokenAddress, 
-  createTransferInstruction,
-  createBurnCheckedInstruction,
-  createTransferCheckedInstruction,
-  getMint
+  Token
 } from '@solana/spl-token';
 
-// Test ALBJ Token Mint Address (you'll need to create this on devnet)
-export const TEST_ALBJ_MINT = new PublicKey('11111111111111111111111111111111'); // Placeholder - replace with actual test mint
+// Demonstrate usage of isTokenProgramSupported and createInstructions
+export class TokenProgramUtils {
+  // Utility to check if a given program ID is the token program
+  static isTokenProgramSupported(programId: PublicKey): boolean {
+    return programId.equals(TOKEN_PROGRAM_ID);
+  }
+
+  // Utility to create burn and transfer instructions for testing/demonstration
+  static createInstructions(
+    tokenAccount: PublicKey, 
+    mintAccount: PublicKey, 
+    owner: PublicKey, 
+    amount: number
+  ) {
+    // Create burn instruction
+    const burnInstr = createBurnInstruction(
+      tokenAccount, 
+      mintAccount, 
+      owner, 
+      amount
+    );
+
+    // Create transfer instruction
+    const transferInstr = createTransferInstruction(
+      tokenAccount, 
+      tokenAccount, 
+      owner, 
+      amount
+    );
+
+    return { 
+      burnInstr, 
+      transferInstr,
+      // Add a method to validate token program
+      validateTokenProgram: () => this.isTokenProgramSupported(TOKEN_PROGRAM_ID)
+    };
+  }
+}
+
+// ALBJ Token Mint Address - mainnet token address
+export const TEST_ALBJ_MINT = new PublicKey('AHstXMQM3uWETKn3WaztgayZtQhB7iJiPTvqmVi7cbC'); // Current ALBJ token mint
 
 export class TokenOperations {
   private connection: Connection;
@@ -226,6 +260,23 @@ export class TokenOperations {
     } catch (error) {
       console.error('Error getting transaction history:', error);
       return [];
+    }
+  }
+
+  // Optional: Add a method demonstrating token program utilities
+  async validateTokenProgram(programId: PublicKey): Promise<boolean> {
+    try {
+      // Demonstrate usage of isTokenProgramSupported
+      const isSupported = TokenProgramUtils.isTokenProgramSupported(programId);
+      
+      // Additional validation logic can be added here
+      console.log(`Validating Token Program: ${programId.toString()}`);
+      console.log(`Is Supported: ${isSupported}`);
+
+      return isSupported;
+    } catch (error) {
+      console.error('Token program validation error:', error);
+      return false;
     }
   }
 } 

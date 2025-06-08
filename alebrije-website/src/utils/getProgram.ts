@@ -4,7 +4,7 @@ import { WalletContextState } from "@solana/wallet-adapter-react";
 import idlJson from "../idl/Alebrije.json";
 
 const idl = idlJson as unknown as Idl;
-const PROGRAM_ID = new PublicKey("93CCq4xaFrrEmoD8DtwD8rjuizZddBrnZYv3p7oQSSTz");
+const PROGRAM_ID = new PublicKey("26Uv9ibbjvqLYLjGCHuYE9xcPwVmd3JGsMzAqYMaSZY3");
 
 type AnchorWallet = {
     publicKey: PublicKey;

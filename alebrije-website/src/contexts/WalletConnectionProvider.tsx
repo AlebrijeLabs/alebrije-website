@@ -20,7 +20,7 @@ export const WalletConnectionProvider: FC<{ children: ReactNode }> = ({ children
 
     const endpoint = useMemo(() => {
         console.log("Setting endpoint");
-        return clusterApiUrl("devnet");
+        return clusterApiUrl("mainnet-beta");
     }, []);
 
     const wallets = useMemo(() => {

@@ -1,0 +1,21 @@
+[package]
+name = "alebrije-coin"
+version = "0.2.0"
+description = "ALBJ Token Smart Contract with Automatic Burn Mechanism"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "alebrije_coin"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+default = []
+
+[dependencies]
+anchor-lang = "0.31.0"
+anchor-spl = "0.31.0" 
