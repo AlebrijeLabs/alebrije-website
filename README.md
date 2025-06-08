@@ -24,4 +24,4 @@ To run this site locally:
 
 ## Deployment
 
-The site is configured to deploy automatically via Netlify when changes are pushed to the main branch. # Force rebuild Sun Jun  8 00:39:17 CDT 2025
+The site is configured to deploy automatically via Netlify when changes are pushed to the main branch. # Force rebuild 2025-06-08 - Mainnet deployment ready
