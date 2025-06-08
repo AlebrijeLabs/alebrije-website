@@ -8,7 +8,6 @@ import {
 } from "@solana/wallet-adapter-react-ui";
 import { clusterApiUrl } from "@solana/web3.js";
 import {
-  PhantomWalletAdapter,
   SolflareWalletAdapter
 } from "@solana/wallet-adapter-wallets";
 import "@solana/wallet-adapter-react-ui/styles.css";
@@ -23,11 +22,11 @@ interface WalletContextProviderProps {
 export const WalletContextProvider: FC<WalletContextProviderProps> = ({ children }) => {
     const endpoint = useMemo(() => clusterApiUrl(network), []);
     
-    // ✅ SIMPLE: Only Phantom and Solflare - guaranteed to work
+    // ✅ OPTIMIZED: Removed Phantom (now standard wallet) to eliminate console warning
     const wallets = useMemo(
         () => [
-            new PhantomWalletAdapter(),
             new SolflareWalletAdapter()
+            // Phantom removed - it's automatically detected as standard wallet
         ],
         []
     );
