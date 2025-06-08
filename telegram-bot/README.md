@@ -132,4 +132,89 @@ For bot issues or feature requests:
 
 **Status**: 🟢 **LIVE AND READY**
 
-The bot is fully functional and ready to serve the ALBJ community! 
+The bot is fully functional and ready to serve the ALBJ community!
+
+# ALBJ Telegram Bot - 24/7 Deployment Guide
+
+## 🚀 Quick Deploy to Railway (FREE)
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new)
+
+### Step-by-Step Railway Setup:
+
+1. **Go to [Railway.app](https://railway.app)**
+2. **Sign up** with GitHub
+3. **Click "New Project"**
+4. **Select "Deploy from GitHub repo"**
+5. **Connect your GitHub account**
+6. **Create a new repo** with this bot code
+7. **Add Environment Variable:**
+   - `BOT_TOKEN` = `your_bot_token_here`
+8. **Deploy!** 🎉
+
+### Environment Variables Needed:
+```
+BOT_TOKEN=7604576999:AAHk7EqYFBM2jNGPSp4UFLnEEidWJgwYGyI
+```
+
+## 💰 Deploy to DigitalOcean ($6/month)
+
+### Step-by-Step DigitalOcean Setup:
+
+1. **Create DigitalOcean account**
+2. **Create Droplet** (Basic $6/month)
+3. **SSH into server**
+4. **Install Node.js:**
+   ```bash
+   curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+   sudo apt-get install -y nodejs
+   ```
+5. **Upload bot code**
+6. **Install PM2:**
+   ```bash
+   npm install -g pm2
+   ```
+7. **Start bot:**
+   ```bash
+   pm2 start bot.js --name "albj-bot"
+   pm2 save
+   pm2 startup
+   ```
+
+## 🤖 Bot Features
+
+- **Daily Updates** at 9:00 AM UTC
+- **Weekend Specials** at 10:00 AM UTC Saturday  
+- **12 Alebrije Spirits** rotation
+- **Pre/Post Launch** templates
+- **Community Management**
+- **Rate Limited** messaging
+
+## 📊 Commands
+
+```bash
+# Test the system
+npm run test
+
+# Start daily updates
+npm run daily
+
+# Start bot
+npm start
+```
+
+## 🔧 Configuration
+
+Edit `groups-config.js` to add your group IDs:
+
+```javascript
+TEST_GROUPS: [
+  '-4767748512',  // Your group ID here
+],
+```
+
+## 🌟 Support
+
+- **Telegram:** @ALBJTokenBot
+- **Website:** Coming June 12, 2025
+- **Community:** ALBJ Test Group 

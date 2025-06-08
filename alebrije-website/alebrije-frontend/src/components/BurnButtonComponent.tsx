@@ -5,7 +5,7 @@ import { PublicKey, Transaction } from "@solana/web3.js";
 import { getAssociatedTokenAddress, createBurnInstruction, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 // Removed unused BN import
 
-const MINT_ADDRESS = new PublicKey("FSx3upaoPomkueMg7rftj8dy75GeifDL7qGbBSSC9KRt");
+const MINT_ADDRESS = new PublicKey(import.meta.env.VITE_TOKEN_MINT_ADDRESS || "AHstXMQM3uWETKn3WaztgayZtQhB7iJiPTvqmVi7cbC");
 
 const BurnButtonComponent = () => {
     const [amount, setAmount] = useState("0");

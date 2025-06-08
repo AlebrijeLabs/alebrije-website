@@ -59,6 +59,9 @@ const HomePage: React.FC = () => {
     const [showTestBurnModal, setShowTestBurnModal] = useState(false);
     const [showTestTransferModal, setShowTestTransferModal] = useState(false);
     const [showTestHistoryModal, setShowTestHistoryModal] = useState(false);
+    
+    // State for token balance in test mode (reflects current balance after burn)
+    const [testBalance, setTestBalance] = useState(674998500);
 
     // Check for test mode on component mount
     useEffect(() => {
@@ -337,11 +340,15 @@ const HomePage: React.FC = () => {
             {/* Test Mode Modals */}
             <TestBurnModal 
                 isOpen={showTestBurnModal} 
-                onClose={() => setShowTestBurnModal(false)} 
+                onClose={() => setShowTestBurnModal(false)}
+                balance={testBalance}
+                updateBalance={setTestBalance}
             />
             <TestTransferModal 
                 isOpen={showTestTransferModal} 
-                onClose={() => setShowTestTransferModal(false)} 
+                onClose={() => setShowTestTransferModal(false)}
+                balance={testBalance}
+                updateBalance={setTestBalance}
             />
             <TestHistoryModal 
                 isOpen={showTestHistoryModal} 
@@ -584,7 +591,9 @@ const HomePage: React.FC = () => {
                                 
                                 <div className="wallet-network">
                                     <span className="network-label">Network:</span>
-                                    <span className="network-value">🌐 Solana Mainnet</span>
+                                    <span className="network-value">
+                                        {isTestMode ? "🌐 Solana Devnet" : "🌐 Solana Mainnet"}
+                                    </span>
                                 </div>
                                 
                                 <div className="wallet-address">
@@ -605,7 +614,9 @@ const HomePage: React.FC = () => {
                                 
                                 <div className="wallet-balance">
                                     <span className="balance-label">ALBJ Balance:</span>
-                                    <span className="balance-value">Available June 12, 2025</span>
+                                    <span className="balance-value">
+                                        {isTestMode ? `${testBalance.toLocaleString()} ALBJ` : "Available June 12, 2025"}
+                                    </span>
                                 </div>
                             </div>
                             

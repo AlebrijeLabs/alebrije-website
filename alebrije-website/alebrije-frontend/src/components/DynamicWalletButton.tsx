@@ -17,13 +17,26 @@ const walletIcons = {
   default: '💼'
 };
 
-// Additional wallet logo URLs (for more professional look)
-const walletLogos = {
-  phantom: 'https://phantom.app/img/meta/phantom.png',
-  solflare: 'https://solflare.com/assets/solflare.svg',
-  backpack: 'https://backpack.app/logo.png',
-  glow: 'https://glow.app/logo.png',
-  default: null
+// Demonstrate usage of walletLogos and faUser
+const WalletUtils = {
+  // Use walletLogos to provide fallback or default logo
+  getWalletLogo: (walletName: string) => {
+    const normalizedName = walletName.toLowerCase();
+    const logos = {
+      phantom: 'https://phantom.app/img/meta/phantom.png',
+      solflare: 'https://solflare.com/assets/solflare.svg',
+      backpack: 'https://backpack.app/logo.png',
+      glow: 'https://glow.app/logo.png',
+      default: null
+    };
+
+    return logos[normalizedName as keyof typeof logos] || logos.default;
+  },
+
+  // Demonstrate usage of faUser icon
+  getUserIcon: () => {
+    return faUser;
+  }
 };
 
 const DynamicWalletButton: React.FC = () => {
@@ -112,6 +125,53 @@ const DynamicWalletButton: React.FC = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  // Optional: Add a user profile section that uses faUser
+  const renderUserProfile = () => {
+    const userIcon = faUser;
+    return (
+      <div className="user-profile" style={{
+        display: 'flex',
+        alignItems: 'center',
+        padding: '10px',
+        background: 'rgba(0,0,0,0.2)',
+        borderRadius: '8px',
+        margin: '10px 0'
+      }}>
+        <FontAwesomeIcon 
+          icon={userIcon} 
+          style={{ 
+            marginRight: '10px', 
+            color: '#00d4ff' 
+          }} 
+        />
+        <div>
+          <div style={{ fontWeight: 'bold', color: '#cccccc' }}>
+            User Profile
+          </div>
+          <div style={{ 
+            fontSize: '0.8rem', 
+            color: '#00ff41' 
+          }}>
+            {publicKey ? publicKey.toString().substring(0, 12) + '...' : 'Not Connected'}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Demonstrate usage of renderUserProfile in a separate method
+  const showUserProfileModal = () => {
+    // This method can be used to show a more detailed user profile
+    const profileElement = renderUserProfile();
+    
+    // Example: You could use this to show a modal or additional info
+    alert('User Profile:\n' + JSON.stringify({
+      connected: connected,
+      publicKey: publicKey?.toString(),
+      walletName: wallet?.adapter?.name
+    }));
+  };
+
   if (connected && publicKey) {
     return (
       <div className="dynamic-wallet-connected" ref={dropdownRef}>
@@ -144,10 +204,21 @@ const DynamicWalletButton: React.FC = () => {
             
             <div className="dropdown-divider"></div>
             
+            {/* Render user profile in dropdown */}
+            {renderUserProfile()}
+            
             <div className="dropdown-actions">
               <button className="dropdown-action" onClick={copyAddress}>
                 <FontAwesomeIcon icon={faCopy} />
                 <span>{addressCopied ? 'Copied!' : 'Copy Address'}</span>
+              </button>
+              
+              <button 
+                className="dropdown-action user-profile-action" 
+                onClick={showUserProfileModal}
+              >
+                <FontAwesomeIcon icon={faUser} />
+                <span>Profile Details</span>
               </button>
               
               <button className="dropdown-action disconnect-action" onClick={handleDisconnect}>

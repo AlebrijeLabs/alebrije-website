@@ -1,0 +1,52 @@
+# Dependency directories
+node_modules
+npm-debug.log
+.npm
+
+# Environment files
+.env
+*.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Git and CI
+.git
+.gitignore
+.github
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary and backup files
+*.swp
+*.swo
+*~
+.tmp
+.temp
+
+# Build and test directories
+dist
+build
+coverage
+
+# Database and persistent data
+data/*.sqlite
+*.db
+temp/
+logs/
+
+# Project-specific ignores
+README.md
+SETUP-GUIDE.md
+*.md 

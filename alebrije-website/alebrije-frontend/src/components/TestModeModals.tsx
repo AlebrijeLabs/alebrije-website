@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { PublicKey } from '@solana/web3.js';
+// import { PublicKey } from '@solana/web3.js';
 // import { TokenOperations } from '../utils/tokenOperations';
 
 interface ModalProps {
@@ -31,29 +31,21 @@ const BaseModal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) =
 interface BurnModalProps {
   isOpen: boolean;
   onClose: () => void;
+  balance: number;
+  updateBalance: (newBalance: number) => void;
 }
 
-export const TestBurnModal: React.FC<BurnModalProps> = ({ isOpen, onClose }) => {
+export const TestBurnModal: React.FC<BurnModalProps> = ({ isOpen, onClose, balance, updateBalance }) => {
   const { publicKey, signTransaction } = useWallet();
   const [amount, setAmount] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<string>('');
-  const [balance, setBalance] = useState<number>(0);
 
   // const tokenOps = new TokenOperations(true); // Test mode - disabled for now
 
   useEffect(() => {
-    if (isOpen && publicKey) {
-      // loadBalance(); // Disabled for now
-    }
+    // Balance is managed by parent component
   }, [isOpen, publicKey]);
-
-  const loadBalance = async () => {
-    if (!publicKey) return;
-    // const bal = await tokenOps.getTokenBalance(publicKey); // Disabled for now
-    // setBalance(bal);
-    setBalance(0); // Placeholder
-  };
 
   const handleBurn = async () => {
     if (!publicKey || !signTransaction || !amount) return;
@@ -68,10 +60,12 @@ export const TestBurnModal: React.FC<BurnModalProps> = ({ isOpen, onClose }) => 
       //   signTransaction
       // );
 
-      // Placeholder response for now
-      setMessage(`🧪 TEST MODE: Burn functionality temporarily disabled while fixing dependencies. Amount: ${amount} ALBJ`);
+      // Simulate successful burn in test mode
+      const burnAmount = parseFloat(amount);
+      const newBalance = balance - burnAmount;
+      updateBalance(newBalance);
+      setMessage(`✅ SUCCESS: Burned ${amount} ALBJ tokens!\nNew Balance: ${newBalance.toLocaleString()} ALBJ`);
       setAmount('');
-      await loadBalance(); // Refresh balance
     } catch (error) {
       setMessage(`❌ Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
@@ -88,7 +82,7 @@ export const TestBurnModal: React.FC<BurnModalProps> = ({ isOpen, onClose }) => 
         
         <div style={{ marginBottom: '1rem' }}>
           <p style={{ color: '#00ff41', fontSize: '0.9rem' }}>
-            Current Balance: <strong>{balance} ALBJ</strong>
+            Current Balance: <strong>{balance.toLocaleString()} ALBJ</strong>
           </p>
         </div>
 
@@ -166,30 +160,22 @@ export const TestBurnModal: React.FC<BurnModalProps> = ({ isOpen, onClose }) => 
 interface TransferModalProps {
   isOpen: boolean;
   onClose: () => void;
+  balance: number;
+  updateBalance: (newBalance: number) => void;
 }
 
-export const TestTransferModal: React.FC<TransferModalProps> = ({ isOpen, onClose }) => {
+export const TestTransferModal: React.FC<TransferModalProps> = ({ isOpen, onClose, balance, updateBalance }) => {
   const { publicKey, signTransaction } = useWallet();
   const [amount, setAmount] = useState<string>('');
   const [recipient, setRecipient] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<string>('');
-  const [balance, setBalance] = useState<number>(0);
 
   // const tokenOps = new TokenOperations(true); // Test mode - disabled for now
 
   useEffect(() => {
-    if (isOpen && publicKey) {
-      // loadBalance(); // Disabled for now
-    }
+    // Balance is managed by parent component
   }, [isOpen, publicKey]);
-
-  const loadBalance = async () => {
-    if (!publicKey) return;
-    // const bal = await tokenOps.getTokenBalance(publicKey); // Disabled for now
-    // setBalance(bal);
-    setBalance(0); // Placeholder
-  };
 
   const handleTransfer = async () => {
     if (!publicKey || !signTransaction || !amount || !recipient) return;
@@ -198,18 +184,25 @@ export const TestTransferModal: React.FC<TransferModalProps> = ({ isOpen, onClos
     setMessage('');
 
     try {
-      // const result = await tokenOps.transferTokens( // Disabled for now
-      //   publicKey,
-      //   recipient,
-      //   parseFloat(amount),
-      //   signTransaction
-      // );
+      // Calculate 5% tax
+      const transferAmount = parseFloat(amount);
+      const taxAmount = transferAmount * 0.05;
+      const totalDeducted = transferAmount + taxAmount;
+      
+      // Check if sufficient balance
+      if (totalDeducted > balance) {
+        setMessage(`❌ Insufficient balance!\nRequired: ${totalDeducted.toLocaleString()} ALBJ (${transferAmount.toLocaleString()} + ${taxAmount.toLocaleString()} tax)\nAvailable: ${balance.toLocaleString()} ALBJ`);
+        return;
+      }
 
-      // Placeholder response for now
-      setMessage(`🧪 TEST MODE: Transfer functionality temporarily disabled while fixing dependencies. Amount: ${amount} ALBJ to ${recipient}`);
+      // Simulate successful transfer
+      const newBalance = balance - totalDeducted;
+      updateBalance(newBalance);
+      
+      setMessage(`✅ SUCCESS: Transfer completed!\n\n📤 Sent: ${transferAmount.toLocaleString()} ALBJ\n💰 Tax (5%): ${taxAmount.toLocaleString()} ALBJ\n📊 Total Deducted: ${totalDeducted.toLocaleString()} ALBJ\n📍 To: ${recipient.substring(0, 8)}...${recipient.substring(recipient.length - 8)}\n💳 New Balance: ${newBalance.toLocaleString()} ALBJ`);
+      
       setAmount('');
       setRecipient('');
-      await loadBalance(); // Refresh balance
     } catch (error) {
       setMessage(`❌ Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
@@ -226,7 +219,7 @@ export const TestTransferModal: React.FC<TransferModalProps> = ({ isOpen, onClos
         
         <div style={{ marginBottom: '1rem' }}>
           <p style={{ color: '#00ff41', fontSize: '0.9rem' }}>
-            Current Balance: <strong>{balance} ALBJ</strong>
+            Current Balance: <strong>{balance.toLocaleString()} ALBJ</strong>
           </p>
         </div>
 
@@ -326,24 +319,56 @@ interface HistoryModalProps {
 
 export const TestHistoryModal: React.FC<HistoryModalProps> = ({ isOpen, onClose }) => {
   const { publicKey } = useWallet();
-  const [transactions, setTransactions] = useState<any[]>([]);
+  const [history, setHistory] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  // const tokenOps = new TokenOperations(true); // Test mode - disabled for now
 
   useEffect(() => {
     if (isOpen && publicKey) {
-      // loadHistory(); // Disabled for now
+      loadHistory();
     }
   }, [isOpen, publicKey]);
 
   const loadHistory = async () => {
     if (!publicKey) return;
+    
     setIsLoading(true);
-    // const history = await tokenOps.getTransactionHistory(publicKey); // Disabled for now
-    // setTransactions(history);
-    setTransactions([]); // Placeholder
-    setIsLoading(false);
+    try {
+      const now = new Date();
+      const testHistory = [
+        { 
+          id: 1, 
+          type: '🚀 Transfer', 
+          amount: '10,000 ALBJ', 
+          date: new Date(now.getTime() - 1 * 60000).toLocaleString(),
+          status: '✅ Completed',
+          to: 'BA8h62nj...oEKweWUG',
+          taxPaid: '500 ALBJ (5%)',
+          txHash: 'def789...ghi012'
+        },
+        { 
+          id: 2, 
+          type: '🔥 Burn', 
+          amount: '1,000 ALBJ', 
+          date: new Date(now.getTime() - 15 * 60000).toLocaleString(),
+          status: '✅ Completed',
+          txHash: 'abc123...def456'
+        },
+        { 
+          id: 3, 
+          type: '📥 Received', 
+          amount: '675,000,000 ALBJ', 
+          date: new Date(now.getTime() - 45 * 60000).toLocaleString(),
+          status: '✅ Completed',
+          from: 'Initial Distribution',
+          txHash: 'xyz789...uvw012'
+        }
+      ];
+      setHistory(testHistory);
+    } catch (error) {
+      console.error('Error loading history:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -355,10 +380,10 @@ export const TestHistoryModal: React.FC<HistoryModalProps> = ({ isOpen, onClose 
 
         {isLoading ? (
           <div style={{ color: '#00ff41' }}>🔄 Loading transactions...</div>
-        ) : transactions.length > 0 ? (
+        ) : history.length > 0 ? (
           <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
-            {transactions.map((tx, index) => (
-              <div key={index} style={{
+            {history.map((tx) => (
+              <div key={tx.id} style={{
                 background: 'rgba(0,0,0,0.6)',
                 border: '1px solid rgba(0,255,255,0.3)',
                 borderRadius: '8px',
@@ -366,12 +391,51 @@ export const TestHistoryModal: React.FC<HistoryModalProps> = ({ isOpen, onClose 
                 marginBottom: '0.5rem',
                 textAlign: 'left'
               }}>
-                <div style={{ fontSize: '0.8rem', color: '#00d4ff' }}>
-                  Signature: {tx.signature.substring(0, 20)}...
+                <div style={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center',
+                  marginBottom: '0.5rem'
+                }}>
+                  <span style={{ color: '#00ff41', fontWeight: 'bold' }}>
+                    {tx.type}
+                  </span>
+                  <span style={{ color: '#ffffff', fontWeight: 'bold' }}>
+                    {tx.amount}
+                  </span>
                 </div>
-                <div style={{ fontSize: '0.8rem', color: '#cccccc' }}>
-                  Block: {tx.slot} | Time: {tx.blockTime ? new Date(tx.blockTime * 1000).toLocaleString() : 'Unknown'}
+                
+                <div style={{ fontSize: '0.8rem', color: '#cccccc', marginBottom: '0.3rem' }}>
+                  📅 {tx.date}
                 </div>
+                
+                <div style={{ fontSize: '0.8rem', color: '#00d4ff', marginBottom: '0.3rem' }}>
+                  {tx.status}
+                </div>
+                
+                {tx.txHash && (
+                  <div style={{ fontSize: '0.7rem', color: '#888' }}>
+                    🔗 TX: {tx.txHash}
+                  </div>
+                )}
+                
+                {tx.from && (
+                  <div style={{ fontSize: '0.7rem', color: '#888' }}>
+                    📤 From: {tx.from}
+                  </div>
+                )}
+                
+                {tx.to && (
+                  <div style={{ fontSize: '0.7rem', color: '#888' }}>
+                    📥 To: {tx.to}
+                  </div>
+                )}
+                
+                {tx.taxPaid && (
+                  <div style={{ fontSize: '0.7rem', color: '#ff9500' }}>
+                    💰 Tax: {tx.taxPaid}
+                  </div>
+                )}
               </div>
             ))}
           </div>

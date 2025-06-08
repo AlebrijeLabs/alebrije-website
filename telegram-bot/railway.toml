@@ -1,0 +1,11 @@
+[build]
+builder = "nixpacks"
+
+[build.nixpacksConfig]
+cmds = ["npm install --production --no-package-lock"]
+
+[deploy]
+startCommand = "node bot.js"
+
+[[services]]
+name = "albj-bot" 

@@ -9,12 +9,15 @@
         cursive,
         sans-serif;
     text-align: center;
+    position: relative;
 }
 
 .logo {
     width: 150px;
     margin-bottom: 1rem;
     animation: float 3s ease-in-out infinite;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(255, 102, 0, 0.3);
 }
 
 @keyframes float {
@@ -35,12 +38,43 @@ h1 {
     font-size: 3rem;
     margin-bottom: 0.5rem;
     color: #ff6600;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
 p {
     font-size: 1.2rem;
     color: #333;
     margin-bottom: 1.5rem;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: 2px solid #ff6600;
+    min-width: 140px;
+}
+
+.stat-item h3 {
+    margin: 0 0 0.5rem 0;
+    color: #ff6600;
+    font-size: 0.9rem;
+}
+
+.stat-item p {
+    margin: 0;
+    font-weight: bold;
+    color: #333;
+    font-size: 1rem;
 }
 
 .button-group {
@@ -53,7 +87,7 @@ p {
 
 button,
 .whitepaper-link {
-    background-color: #222;
+    background-color: #ff6600;
     color: white;
     font-size: 1rem;
     padding: 0.75rem 1.5rem;
@@ -61,27 +95,132 @@ button,
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
 }
 
 button:hover,
 .whitepaper-link:hover {
     transform: scale(1.05);
-    background-color: #444;
-    box-shadow: 0 0 10px #ff6600;
+    background-color: #e55a00;
+    box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+}
+
+.wallet-dashboard {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(255, 102, 0, 0.1), rgba(255, 255, 255, 0.9));
+    border-radius: 16px;
+    border: 2px solid #ff6600;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    max-width: 400px;
+}
+
+.wallet-dashboard h2 {
+    color: #ff6600;
+    margin-bottom: 1rem;
+}
+
+.balance-display p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.balance-display small {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.alebrije-gallery {
+    margin: 3rem 0;
+    max-width: 800px;
+}
+
+.alebrije-gallery h2 {
+    color: #ff6600;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.creature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.creature-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #ff6600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.creature-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 102, 0, 0.4);
 }
 
 .social-links {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .social-links a {
-    margin: 0 1rem;
-    color: #000;
+    color: #ff6600;
     font-weight: bold;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ff6600;
 }
 
 .social-links a:hover {
-    color: #ff6600;
+    color: white;
+    background-color: #ff6600;
+    transform: translateY(-2px);
+}
+
+footer {
+    border-top: 2px solid rgba(255, 102, 0, 0.3);
+    padding-top: 2rem;
+    margin-top: 3rem;
+}
+
+footer p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .stats-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .creature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .social-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
 }
